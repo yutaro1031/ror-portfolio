@@ -7,5 +7,20 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 if Rails.env == 'development'
-  User.create(name: "admin", password: "password", password_confirmation: "password")
+  # User.create(name: "admin", password: "password", password_confirmation: "password")
+  # User.create(name: "admin2", password: "password", password_confirmation: "password", admin_flg: TRUE)
+  # Tag.create([
+  #                { name: 'Ruby on Rails4' },
+  #                { name: 'Ruby on Rails5' },
+  #                { name: 'Python2' },
+  #                { name: 'Python3' },
+  #                { name: 'Django2' },
+  #            ])
+  # (1..50).each do |i|
+  #   Article.create(title: "タイトル#{i}", user_id: 2, text: "本文#{i}")
+  # end
+  #
+  # (1..50).each do |i|
+  #   TagRelation.create(article_id: 1, tag_id: 3)
+  # end
 end
