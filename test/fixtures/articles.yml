@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: articles
+#
+#  id          :bigint(8)        not null, primary key
+#  title       :string(255)
+#  user_id     :bigint(8)
+#  eyecatch    :binary(65535)
+#  text        :string(255)
+#  publish_flg :boolean
+#  del_flg     :boolean
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  user: one
+  eyecatch: 
+  text: 
+  publish_flg: false
+  del_flg: false
+
+two:
+  title: MyString
+  user: two
+  eyecatch: 
+  text: 
+  publish_flg: false
+  del_flg: false

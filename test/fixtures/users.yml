@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint(8)        not null, primary key
+#  name            :string(255)
+#  password_digest :string(255)
+#  admin_flg       :boolean
+#  del_flg         :boolean
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  password_digest: MyString
+  admin_flg: false
+  del_flg: false
+
+two:
+  name: MyString
+  password_digest: MyString
+  admin_flg: false
+  del_flg: false
