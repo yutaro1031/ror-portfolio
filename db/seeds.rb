@@ -24,4 +24,6 @@ if Rails.env == 'development'
   #   TagRelation.create(article_id: i, tag_id: 3)
   #   TagRelation.create(article_id: i, tag_id: 4)
   # end
+  # article = Article.find_by(id: 1)
+  # article.update(del_flg: TRUE)
 end
