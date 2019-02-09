@@ -21,6 +21,7 @@ if Rails.env == 'development'
   # end
   #
   # (1..50).each do |i|
-  #   TagRelation.create(article_id: 1, tag_id: 3)
+  #   TagRelation.create(article_id: i, tag_id: 3)
+  #   TagRelation.create(article_id: i, tag_id: 4)
   # end
 end

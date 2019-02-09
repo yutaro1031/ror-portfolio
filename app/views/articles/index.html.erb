@@ -4,6 +4,7 @@
       <th><%= article.id %></th>
       <td><%= article.title %></td>
       <td><%= article.eyecatch %></td>
+      <td><%= link_to '詳細', article, class: 'btn btn-outline-dark' %></td>
       <td><%= article.updated_at %></td>
     </tr>
   <% end %>
