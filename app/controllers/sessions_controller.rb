@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to mypage_path
     else
-      redirect_to articles_path
+      redirect_to articles_path #エラーメッセージ
     end
   end
 
