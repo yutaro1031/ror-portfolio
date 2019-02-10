@@ -4,10 +4,11 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:post][:password])
       session[:user_id] = user.id
+      session[:admin_flg] = user.admin_flg
       flash[:notice] = "#{user.name} さん、こんにちは!"
       redirect_to articles_path
     else
-      redirect_to root_path, flash: {
+      redirect_to 'login', flash: {
           error_messages: ["ユーザー名またはパスワードが正しくありません"]
       }
     end
