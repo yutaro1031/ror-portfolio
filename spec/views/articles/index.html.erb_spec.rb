@@ -19,4 +19,10 @@
 
     expect(rendered).to have_selector '.alert-primary', text: "test"
   end
+
+  it "ページネーションが表示されているか" do
+    render
+
+    expect(rendered).to have_css '.pagination'
+  end
 end
