@@ -1,8 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe ArticlesController, type: :controller do
+  describe "GET #index" do
+    it "正常なレスポンスか" do
+      get :index
+      expect(response).to be_successful
+    end
+
+    it "200レスポンスが返ってくるか" do
+      get :index
+      expect(response).to have_http_status(:success)
+    end
+
+    it ':indexテンプレートをレンダリングしているか' do
+      get :index
+      expect(response).to render_template :index
+    end
+  end
 
   describe "GET #new" do
+    # 【メモ】
     # sessionは追加できたが、404を返すメソッドが「application_controller」に定義されている
     # よって、レスポンスの判断ができない
 
@@ -33,6 +50,6 @@ RSpec.describe ArticlesController, type: :controller do
 
   end
 
-  # new以外のテストも追加
+  
 
 end
