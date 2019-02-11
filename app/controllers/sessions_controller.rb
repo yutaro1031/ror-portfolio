@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "#{user.name} さん、こんにちは!"
       redirect_to articles_path
     else
-      redirect_to 'login', flash: {
+      redirect_to authenticate_path, flash: {
           error_messages: ["ユーザー名またはパスワードが正しくありません"]
       }
     end
