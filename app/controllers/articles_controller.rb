@@ -11,6 +11,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    render_404 if session[:admin_flg]
     @article = Article.new(flash[:article])
   end
 
