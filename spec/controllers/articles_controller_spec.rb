@@ -40,6 +40,7 @@ RSpec.describe ArticlesController, type: :controller do
     end
 
     it "@articleが期待される値を持つ" do
+      get :show, params: { id: @article }
       expect(assigns(:article)).to eq @article
     end
   end
