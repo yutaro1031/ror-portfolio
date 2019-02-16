@@ -18,6 +18,30 @@ RSpec.describe ArticlesController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    before do
+      user = FactoryBot.create(:user)
+      @article = FactoryBot.create(:article, user: user)
+      get :show, params: { id: @article }
+    end
+
+    it "正常なレスポンスか" do
+      expect(response).to be_successful
+    end
+
+    it "200レスポンスが返ってくるか" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it ":indexテンプレートをレンダリングしているか" do
+      expect(response).to render_template :show
+    end
+
+    it "@articleが期待される値を持つ" do
+      expect(assigns(:article)).to eq @article
+    end
+  end
+
   describe "GET #new" do
     # 【メモ】
     # sessionは追加できたが、404を返すメソッドが「application_controller」に定義されている
@@ -47,9 +71,6 @@ RSpec.describe ArticlesController, type: :controller do
       get :new
       expect(response).to render_template :new
     end
-
   end
-
-  
 
 end
