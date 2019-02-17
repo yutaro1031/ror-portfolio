@@ -24,7 +24,7 @@
       </li>
     </ul>
 
-    <% if user_signed_in? %>
+    <% if current_user.admin_flg %>
       <ul class="navbar-nav mr-3">
         <li class="nav-item"><a class="btn btn-info" href="<%= new_article_path %>">記事作成</a></li>
       </ul>
