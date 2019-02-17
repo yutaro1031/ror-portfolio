@@ -24,6 +24,7 @@ FactoryBot.define do
     name { "test1" }
     password { "password" }
     password_confirmation { "password" }
+    email { "test@gmail.com" }
 
     trait :admin_user do
       admin_flg { TRUE }
