@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :trackable, :authentication_keys => [:login]
+         :confirmable, :authentication_keys => [:login]
 
   # ログイン認証の条件をオーバーライド(nameでもemailでもログイン可能に)
   def self.find_first_by_auth_conditions(warden_conditions)

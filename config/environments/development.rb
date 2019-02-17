@@ -70,6 +70,6 @@ Rails.application.configure do
       :domain => "smtp.gmail.com",
       :user_name => "yutarochanchan@gmail.com",
       :password => "hyper1031",
-      :authentication => "login"
+      :authentication => "login",
   }
 end
