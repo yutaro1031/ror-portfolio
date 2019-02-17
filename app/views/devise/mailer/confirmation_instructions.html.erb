@@ -1,5 +1,5 @@
-<p>Welcome <%= @email %>!</p>
+<p>仮登録ありがとうございます <%= @email %>さん!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>下記のリンクにてアクセスすることにより、本登録が完了いたします。</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to '本登録を完了させる', confirmation_url(@resource, confirmation_token: @token) %></p>
