@@ -36,3 +36,11 @@
     </form>
   </div>
 </nav>
+
+<% if notice %>
+  <div class="alert alert-primary"><%= notice %></div>
+<% end %>
+
+<% if alert %>
+  <div class="alert alert-danger"><%= alert %></div>
+<% end %>
