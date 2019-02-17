@@ -1,8 +1,8 @@
+<%= render "devise/shared/error_messages", resource: resource %>
+
 <h1>仮登録</h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
   <div class="form-group">
     <%= f.label "ユーザー名" %>
     <%= f.text_field :name, class: 'form-control' %>
