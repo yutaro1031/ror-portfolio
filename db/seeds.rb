@@ -26,4 +26,8 @@ if Rails.env == 'development'
   # end
   # article = Article.find_by(id: 1)
   # article.update(del_flg: TRUE)
+
+  Article.delete_all
+  User.delete_all
+  TagRelation.delete_all
 end

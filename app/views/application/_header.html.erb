@@ -13,9 +13,9 @@
           ユーザー
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <% if session[:user_id] %>
+          <% if user_signed_in? %>
             <%= link_to 'マイページ', mypage_path, class: 'dropdown-item' %>
-            <%= link_to 'ログアウト', logout_path, method: :delete, class: 'dropdown-item' %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
           <% else %>
             <%= link_to '登録', new_user_path, class: 'dropdown-item' %>
             <%= link_to 'ログイン', authenticate_path, class: 'dropdown-item' %>
