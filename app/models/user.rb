@@ -26,7 +26,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :trackable, :authentication_keys => [:login]
 
-  # ログイン認証の条件をオーバーライド
+  # ログイン認証の条件をオーバーライド(nameでもemailでもログイン可能に)
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
