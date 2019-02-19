@@ -27,4 +27,16 @@ RSpec.describe "application/_header", type: :view do
     expect(rendered).to have_selector '.dropdown-item', text: "ログアウト"
     expect(rendered).to have_selector '.btn', text: "記事作成"
   end
+
+  it 'フラッシュが表示されているか(notice)' do
+    view.stub(:notice) { "hoge" }
+    render
+    expect(rendered).to have_css '.alert-primary'
+  end
+
+  it 'フラッシュが表示されているか(alert)' do
+    view.stub(:alert) { "hoge" }
+    render
+    expect(rendered).to have_css '.alert-danger'
+  end
 end
