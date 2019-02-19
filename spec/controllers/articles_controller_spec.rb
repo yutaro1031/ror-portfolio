@@ -20,7 +20,7 @@ RSpec.describe ArticlesController, type: :controller do
 
   describe "GET #show" do
     before do
-      user = FactoryBot.create(:user)
+      user = FactoryBot.create(:user, :admin_user)
       @article = FactoryBot.create(:article, user: user)
     end
 
