@@ -49,6 +49,10 @@ RSpec.describe ArticlesController, type: :controller do
     # 【メモ】
     # sessionは追加できたが、404を返すメソッドが「application_controller」に定義されている
     # よって、レスポンスの判断ができない
+    before do
+      user = FactoryBot.create(:user, :admin_user)
+      login_user user
+    end
 
     it "正常なレスポンスか" do
       # session = { "admin_flg": FALSE }
