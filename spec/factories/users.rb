@@ -27,6 +27,7 @@ FactoryBot.define do
     email { "test@gmail.com" }
 
     trait :admin_user do
+      email { "admin@gmail.com" }
       admin_flg { TRUE }
     end
   end

@@ -86,6 +86,6 @@ RSpec.configure do |config|
   end
 
   # device関連
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include ControllerMacros, type: :controller
+  config.include Devise::Test::ControllerHelpers
+  config.include ControllerMacros
 end
