@@ -4,14 +4,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  # ログイン状態でも仮登録ができるようにオーバーライド
+  prepend_before_action :require_no_authentication, only: [:cancel]
+
   def my_page
     render_404 unless current_user.admin_flg
   end
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    if user_signed_in? && !current_user.admin_flg
+      render_404 and return
+    end
+    super
+  end
 
   # POST /resource
   # def create

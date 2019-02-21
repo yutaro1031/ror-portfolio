@@ -29,4 +29,7 @@ if Rails.env == 'development'
 
   # user = User.find_by(id: 5)
   # user.update(admin_flg: TRUE)
+  user = User.create(name: "test", email: "test@gmail.com", password: "password", password_confirmation: "password")
+  user.confirm
+
 end

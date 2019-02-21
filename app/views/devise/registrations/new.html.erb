@@ -1,6 +1,10 @@
 <%= render "devise/shared/error_messages", resource: resource %>
 
-<h1>仮登録</h1>
+<% if current_user && current_user.admin_flg %>
+  <h1>管理ユーザー仮登録</h1>
+<% else %>
+  <h1>仮登録</h1>
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <div class="form-group">
@@ -25,6 +29,10 @@
     <%= f.label "パスワード(確認)" %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
   </div>
+
+  <% if current_user && current_user.admin_flg %>
+    <%= f.hidden_field :admin_flg, :value => TRUE %>
+  <% end %>
 
   <%= f.submit "仮登録する", class: 'btn btn-primary' %>
 <% end %>
