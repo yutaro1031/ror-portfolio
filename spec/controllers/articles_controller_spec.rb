@@ -20,7 +20,7 @@ RSpec.describe ArticlesController, type: :controller do
 
   describe "GET #show" do
     before do
-      user = FactoryBot.create(:user)
+      user = FactoryBot.create(:user, :admin_user)
       @article = FactoryBot.create(:article, user: user)
     end
 
@@ -46,34 +46,36 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe "GET #new" do
-    # 【メモ】
-    # sessionは追加できたが、404を返すメソッドが「application_controller」に定義されている
-    # よって、レスポンスの判断ができない
+    before do
+      user = FactoryBot.create(:user, :admin_user)
+      login_user user
+    end
 
     it "正常なレスポンスか" do
-      # session = { "admin_flg": FALSE }
-      # add_session(session)
       get :new
       expect(response).to be_successful
     end
 
     it "200レスポンスが返ってくるか" do
-      # session = { "admin_flg": FALSE }
-      # add_session(session)
       get :new
       expect(response).to have_http_status(:success)
     end
 
-    # it "404レスポンスが返ってくるか(非管理者)" do
-    #   get :new
-    #   session[:admin_flg] = FALSE
-    #   expect(response).to have_http_status "404"
-    # end
+    it "404レスポンスが返ってくるか(非管理者)" do
+      user_not_admin = FactoryBot.create(:user)
+      login_user user_not_admin
+      get :new
+      expect(response).to have_http_status "404"
+    end
 
     it ':newテンプレートをレンダリングしているか' do
       get :new
       expect(response).to render_template :new
     end
+  end
+
+  describe "POST #create" do
+    pending "add some examples to (or delete) #{__FILE__}"
   end
 
 end

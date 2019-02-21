@@ -26,4 +26,7 @@ if Rails.env == 'development'
   # end
   # article = Article.find_by(id: 1)
   # article.update(del_flg: TRUE)
+
+  # user = User.find_by(id: 5)
+  # user.update(admin_flg: TRUE)
 end

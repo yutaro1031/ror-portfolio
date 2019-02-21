@@ -1,22 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-
-  describe "POST #create" do
-
-    it "正しい場合のリダイレクト先が正しいか" do
-      post :create, params: { user: FactoryBot.attributes_for(:user) }
-      expect(response).to redirect_to articles_path
+  describe "GET #me" do
+    it '正常なレスポンスか' do
+      get :me
+      expect(response).to be_successful
     end
 
-    it "nameのバリデーションが効いているか" do
-      post :create, params: { user: FactoryBot.attributes_for(:user, name: "asjdfasljfiejfa;sfna;oejfoai") }
-      expect(response).to redirect_to new_user_path
+    it '200レスポンスが返ってくるか' do
+      get :me
+      expect(response).to have_http_status(:success)
     end
 
-    it "passwordのバリデーションが効いているか" do
-      post :create, params: { user: FactoryBot.attributes_for(:user, password: "hogehoge") }
-      expect(response).to redirect_to new_user_path
+    it ':meテンプレートをレンダリングしているか' do
+      get :me
+      expect(response).to render_template :me
     end
   end
 end

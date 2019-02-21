@@ -13,18 +13,18 @@
           ユーザー
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <% if session[:user_id] %>
+          <% if user_signed_in? %>
             <%= link_to 'マイページ', mypage_path, class: 'dropdown-item' %>
-            <%= link_to 'ログアウト', logout_path, method: :delete, class: 'dropdown-item' %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
           <% else %>
-            <%= link_to '登録', new_user_path, class: 'dropdown-item' %>
-            <%= link_to 'ログイン', authenticate_path, class: 'dropdown-item' %>
+            <%= link_to '登録', new_user_registration_path, class: 'dropdown-item' %>
+            <%= link_to 'ログイン', new_user_session_path, class: 'dropdown-item' %>
           <% end %>
         </div>
       </li>
     </ul>
 
-    <% if session[:admin_flg] %>
+    <% if current_user && current_user.admin_flg %>
       <ul class="navbar-nav mr-3">
         <li class="nav-item"><a class="btn btn-info" href="<%= new_article_path %>">記事作成</a></li>
       </ul>
@@ -36,3 +36,13 @@
     </form>
   </div>
 </nav>
+
+<!--フラッシュメッセージ-->
+
+<% if notice %>
+  <div class="alert alert-primary"><%= notice %></div>
+<% end %>
+
+<% if alert %>
+  <div class="alert alert-danger"><%= alert %></div>
+<% end %>
