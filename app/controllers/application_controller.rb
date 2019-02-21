@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email, :password, :password_confirmation, :current_password])
   end
 
-  # ログイン・ログアウト時のリダイレクト先
+  # ログイン・ログアウト時のリダイレクト先(deviceのメソッドをオーバーライド)
   def after_sign_in_path_for(resource)
     articles_path
   end
