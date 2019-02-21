@@ -42,6 +42,9 @@ gem 'kaminari'
 gem 'rails-i18n'
 gem 'spring-commands-rspec'
 gem 'devise'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'ckeditor'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
