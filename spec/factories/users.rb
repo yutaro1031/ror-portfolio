@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: devise
+# Table name: users
 #
 #  id                     :bigint(8)        not null, primary key
 #  name                   :string(255)      not null
