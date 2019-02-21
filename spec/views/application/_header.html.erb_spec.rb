@@ -15,7 +15,7 @@ RSpec.describe "application/_header", type: :view do
     render
     expect(rendered).to have_selector '.dropdown-item', text: "マイページ"
     expect(rendered).to have_selector '.dropdown-item', text: "ログアウト"
-    expect(rendered).not_to have_selector '.btn', text: "記事作成"
+    expect(rendered).not_to have_selector '.btn', text: "管理者メニュー"
   end
 
   it "ログイン時のヘッダーの場合(管理者)" do
@@ -25,7 +25,7 @@ RSpec.describe "application/_header", type: :view do
     render
     expect(rendered).to have_selector '.dropdown-item', text: "マイページ"
     expect(rendered).to have_selector '.dropdown-item', text: "ログアウト"
-    expect(rendered).to have_selector '.btn', text: "記事作成"
+    expect(rendered).to have_selector '.btn', text: "管理者メニュー"
   end
 
   it 'フラッシュが表示されているか(notice)' do
