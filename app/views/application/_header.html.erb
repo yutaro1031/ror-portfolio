@@ -14,7 +14,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <% if user_signed_in? %>
-            <%= link_to 'マイページ', mypage_path, class: 'dropdown-item' %>
+            <%= link_to 'マイページ', my_page_path, class: 'dropdown-item' %>
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
           <% else %>
             <%= link_to '登録', new_user_registration_path, class: 'dropdown-item' %>
