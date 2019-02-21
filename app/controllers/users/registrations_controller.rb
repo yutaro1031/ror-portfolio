@@ -8,7 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   prepend_before_action :require_no_authentication, only: [:cancel]
 
   def my_page
-    render_404 unless current_user.admin_flg
+    render_404 unless current_user
   end
 
   # GET /resource/sign_up

@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
   resources :articles
 
-  #get 'mypage', to: 'users#me'
   get 'admin', to: 'admin#index'
 
   devise_scope :user do
