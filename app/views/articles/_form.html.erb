@@ -1,6 +1,6 @@
 <%= form_with model: article do |f| %>
   <div class="form-group">
-    <%= f.hidden_field :user_id, value: session[:user_id], class: 'form-control' %>
+    <%= f.hidden_field :user_id, value: current_user.id, class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :title, 'タイトル' %>
@@ -22,5 +22,4 @@
     <%= f.cktext_area :text, class: 'form-control' %>
   </div>
 
-  <%= f.submit '保存', class: 'btn btn-primary' %>
 <% end %>

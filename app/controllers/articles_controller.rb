@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
     else
       redirect_to new_article_path, flash: {
           article: article,
-          error_messages: ["記事の作成に失敗しました"]
+          alert: "記事の作成に失敗しました"
       }
     end
   end
