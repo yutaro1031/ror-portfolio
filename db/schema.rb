@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_02_23_223942) do
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.bigint "user_id"
-    t.binary "eyecatch"
+    t.string "eyecatch"
     t.text "text", null: false
     t.boolean "publish_flg", default: true, null: false
     t.boolean "del_flg", default: false, null: false
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_02_23_223942) do
     t.datetime "updated_at", null: false
     t.integer "pv", default: 0
     t.string "tmp_title"
-    t.binary "tmp_eyecatch"
+    t.string "tmp_eyecatch"
     t.text "tmp_text"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
