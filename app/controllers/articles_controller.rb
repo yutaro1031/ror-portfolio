@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    render_404 unless current_user.admin_flg
+    render_404 unless current_user && current_user.admin_flg
     @article = Article.new(flash[:article])
   end
 
@@ -31,7 +31,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:user_id, :title, :text, tag_ids: [])
+    params.require(:article).permit(:user_id, :title, :text, :eyecatch, :tmp_title, :tmp_text, :tmp_eyecatch, tag_ids: [])
   end
 
   def set_target_article

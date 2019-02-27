@@ -18,6 +18,9 @@
 #
 
 class Article < ApplicationRecord
+  mount_uploader :eyecatch, PictureUploader
+  mount_uploader :tmp_eyecatch, PictureUploader
+
   belongs_to :user
 
   has_many :comments, dependent: :delete_all
