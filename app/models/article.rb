@@ -4,7 +4,7 @@
 #
 #  id           :bigint(8)        not null, primary key
 #  title        :string(255)      not null
-#  user_id      :bigint(8)
+#  user_id      :bigint(8)        (not null)
 #  eyecatch     :string(255)
 #  text         :text(65535)      not null
 #  publish_flg  :boolean          default(TRUE), not null

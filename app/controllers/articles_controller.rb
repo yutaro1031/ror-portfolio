@@ -12,7 +12,17 @@ class ArticlesController < ApplicationController
 
   def new
     render_404 unless current_user && current_user.admin_flg
-    @article = Article.new(flash[:article])
+    @article = Article.new(
+                          user_id: current_user.id,
+                          title: "無題の記事",
+                          text: "ここに本文を入力してください",
+                          publish_flg: FALSE
+    )
+    # あらかじめinsertしておく
+    unless @article.save
+      flash[:alert] = "記事の作成に失敗しました"
+      redirect_to articles_path
+    end
   end
 
   def create
