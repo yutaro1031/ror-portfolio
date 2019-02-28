@@ -18,4 +18,4 @@
 //= require activestorage
 //= require turbolinks
 //= require ckeditor/init
-//= require_tree .
+// require_tree .
