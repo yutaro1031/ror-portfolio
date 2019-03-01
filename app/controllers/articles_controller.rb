@@ -18,25 +18,29 @@ class ArticlesController < ApplicationController
                           text: "ここに本文を入力してください",
                           publish_flg: FALSE
     )
-    # あらかじめinsertしておく
-    unless @article.save
-      flash[:alert] = "記事の作成に失敗しました"
-      redirect_to articles_path
-    end
+    # あらかじめinsertしておく 今はしない
+    # unless @article.save
+    #   flash[:alert] = "記事の作成に失敗しました"
+    #   redirect_to articles_path
+    # end
+
+    # edit画面にリダイレクト(リロードのたびに記事が生成される問題)
   end
 
-  def create
-    article = Article.new(article_params)
-    if article.save
-      flash[:notice] = "「#{article.title}」の記事を作成しました"
-      redirect_to articles_path
-    else
-      redirect_to new_article_path, flash: {
-          article: article,
-          alert: "記事の作成に失敗しました"
-      }
-    end
-  end
+  # def create
+  #   article = Article.new(article_params)
+  #   if article.save
+  #     flash[:notice] = "「#{article.title}」の記事を作成しました"
+  #     redirect_to articles_path
+  #   else
+  #     redirect_to new_article_path, flash: {
+  #         article: article,
+  #         alert: "記事の作成に失敗しました"
+  #     }
+  #   end
+  # end
+
+
 
   private
 
