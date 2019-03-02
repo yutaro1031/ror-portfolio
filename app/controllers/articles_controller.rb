@@ -18,13 +18,17 @@ class ArticlesController < ApplicationController
                           text: "ここに本文を入力してください",
                           publish_flg: FALSE
     )
-    # あらかじめinsertしておく 今はしない
-    # unless @article.save
-    #   flash[:alert] = "記事の作成に失敗しました"
-    #   redirect_to articles_path
-    # end
+    # あらかじめinsertしておく
+    unless @article.save
+      flash[:alert] = "記事の作成に失敗しました"
+      redirect_to articles_path
+    end
 
-    # edit画面にリダイレクト(リロードのたびに記事が生成される問題)
+    redirect_to edit_article_path @article
+  end
+
+  def edit
+    render_404 unless current_user && current_user.admin_flg
   end
 
   # def create
