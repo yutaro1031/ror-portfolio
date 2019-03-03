@@ -2,10 +2,17 @@
   <div class="form-group">
     <%= f.hidden_field :user_id, value: current_user.id, class: 'form-control' %>
   </div>
+  
   <div class="form-group">
     <%= f.label :title, 'タイトル' %>
-    <%= f.text_field :title, class: 'form-control' %>
+
+    <% if article.tmp_title? %>
+      <%= f.text_field :tmp_title, class: 'form-control' %>
+    <% else %>
+      <%= f.text_field :title, class: 'form-control' %>
+    <% end %>
   </div>
+
   <div class="form-group">
     <span>タグ</span>
     <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
@@ -17,20 +24,25 @@
       </div>
     <% end %>
   </div>
+
   <div class="form-group">
     <%= f.label :text, '本文' %>
-    <%= f.cktext_area :text, class: 'form-control' %>
+    <% if article.tmp_text? %>
+      <%= f.cktext_area :tmp_text, class: 'form-control' %>
+    <% else %>
+      <%= f.cktext_area :text, class: 'form-control' %>
+    <% end %>
   </div>
+
   <div class="form-group">
     <img id="eyecatch_img_prev" src="#" class="hidden" alt="アイキャッチ画像"/>
-    <% if article.eyecatch? %>
-      <%= image_tag article.eyecatch.to_s, class: 'eyecatch_present_img' %>
-      <label><%= f.check_box :remove_eyecatch %></label>
 
-    <% elsif article.tmp_eyecatch? %>
+    <% if article.tmp_eyecatch? %>
       <%= image_tag article.tmp_eyecatch.to_s, class: 'eyecatch_present_img' %>
+      <label><%= f.check_box :remove_eyecatch %></label>
+    <% elsif article.eyecatch? %>
+      <%= image_tag article.eyecatch.to_s, class: 'eyecatch_present_img' %>
       <label><%= f.check_box :remove_tmp_eyecatch %></label>
-
     <% end %>
 
     <%= f.label :tmp_eyecatch, 'アイキャッチ画像' %>
