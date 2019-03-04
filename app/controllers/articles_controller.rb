@@ -31,6 +31,10 @@ class ArticlesController < ApplicationController
     render_404 unless current_user && current_user.admin_flg
   end
 
+  def update
+    # ここに下書き保存処理を書く
+  end
+
   # def create
   #   article = Article.new(article_params)
   #   if article.save

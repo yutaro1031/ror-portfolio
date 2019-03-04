@@ -19,8 +19,9 @@ $(document).on('turbolinks:load', function() {
 
     // 自動保存機能
     function ajaxAutoSave() {
-        console.log('autosave');
+        Rails.fire($(".ajax-form")[0], "submit");
     }
+
     // 5秒後に自動保存
     var timer_id = setTimeout(ajaxAutoSave, 5000);
 
