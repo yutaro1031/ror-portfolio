@@ -32,7 +32,12 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    # ここに下書き保存処理を書く
+    # 下書き保存
+    if @article.update_attributes(tmp_article_params)
+      render json: {result: "ok"}
+    else
+      render json: {result: "error"}
+    end
   end
 
   # def create
@@ -52,13 +57,26 @@ class ArticlesController < ApplicationController
 
   private
 
-  def article_params
-    params.require(:article).permit(:user_id, :title, :text, :eyecatch, :tmp_title, :tmp_text, :tmp_eyecatch, tag_ids: [])
-  end
-
   def set_target_article
     @article = Article.find(params[:id])
     render_404 if @article.del_flg # 削除された記事は404
+  end
+
+  def article_params
+    # フォームの構造を変えた時、permitするparamも変える
+    params.require(:article).permit(:user_id, :title, :text, :eyecatch, :tmp_title, :tmp_text, :tmp_eyecatch, tag_ids: [])
+  end
+
+  def tmp_article_params
+    params = article_params
+    params = change_params_to_tmp(params, 'title') if params[:title]
+    change_params_to_tmp(params, 'text') if params[:text]
+  end
+
+  def change_params_to_tmp(params, col_name)
+    params["tmp_#{col_name}".to_sym] = params[col_name.to_sym]
+    params.delete(col_name)
+    params
   end
 
 end
