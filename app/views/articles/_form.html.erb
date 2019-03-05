@@ -1,6 +1,7 @@
 <%= form_with model: article, class: 'ajax-form' do |f| %>
   <div class="form-group">
     <%= f.hidden_field :user_id, value: current_user.id, class: 'form-control' %>
+    <%= f.hidden_field :update_type, value: "tmp", class: 'form-control' %>
   </div>
 
   <div class="form-group">

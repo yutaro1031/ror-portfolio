@@ -32,28 +32,25 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    # 下書き保存
-    if @article.update_attributes(tmp_article_params)
-      render json: {result: "ok"}
-    else
-      render json: {result: "error"}
+    binding.pry
+    case article_params[:update_type]
+
+    when 'tmp' # 下書き保存
+      if @article.update_attributes(tmp_article_params)
+        render json: {result: "ok"}
+      else
+        render json: {result: "error"}
+      end
+
+    when 'publish' # 公開設定
+
+    when 'eyecatch' # アイキャッチ画像
+
+    when 'tags' # タグ
+
+    else render json: {result: "nothing change_type"}
     end
   end
-
-  # def create
-  #   article = Article.new(article_params)
-  #   if article.save
-  #     flash[:notice] = "「#{article.title}」の記事を作成しました"
-  #     redirect_to articles_path
-  #   else
-  #     redirect_to new_article_path, flash: {
-  #         article: article,
-  #         alert: "記事の作成に失敗しました"
-  #     }
-  #   end
-  # end
-
-
 
   private
 
@@ -64,20 +61,24 @@ class ArticlesController < ApplicationController
 
   def article_params
     # フォームの構造を変えた時、permitするparamも変える
-    params.require(:article).permit(:user_id, :title, :text, :eyecatch, :tmp_title, :tmp_text, :tmp_eyecatch, :remove_eyecatch, :remove_tmp_eyecatch, tag_ids: [])
+    params.require(:article).permit(:user_id,
+                                    :title,
+                                    :text,
+                                    :eyecatch,
+                                    :tmp_title,
+                                    :tmp_text,
+                                    :tmp_eyecatch,
+                                    :remove_eyecatch_flg,
+                                    :remove_tmp_eyecatch_flg,
+                                    :update_type,
+                                    tag_ids: [])
   end
 
   def tmp_article_params
     params = article_params
-    params = change_params_to_tmp(params, 'title') if params[:title]
-    params = change_params_to_tmp(params, 'text') if params[:text]
-    params
-  end
-
-  def change_params_to_tmp(params, col_name)
-    params["tmp_#{col_name}".to_sym] = params[col_name.to_sym]
-    params.delete(col_name)
-    params
+    params[:tmp_title] = params[:title] if params[:title]
+    params[:tmp_text] = params[:text] if params[:text]
+    params.slice('tmp_title', 'tmp_text', 'tmp_eyecatch')
   end
 
 end
