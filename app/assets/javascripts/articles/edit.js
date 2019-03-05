@@ -20,10 +20,12 @@ $(document).on('turbolinks:load', function() {
     // 自動保存機能
     function ajaxAutoSave() {
         Rails.fire($(".ajax-form")[0], "submit");
+        $('.saving').removeClass('hidden');
     }
 
-    // 5秒後に自動保存
+    // 5秒後に自動保存(ページ遷移時に保存されないように即停止)
     var timer_id = setTimeout(ajaxAutoSave, 5000);
+    clearTimeout(timer_id);
 
     // 記事を編集するごとにsetTimeoutをリセット
     $('.form-group').on('change',function(e) {
@@ -42,7 +44,25 @@ $(document).on('turbolinks:load', function() {
     });
 
     $(document).on('ajax:success', ".ajax-form", function(e) {
-        console.log(e.detail[0]);
+        $('.saving').addClass('hidden');
+        if (e.detail[0].result === "ok") {
+            $('.saved').removeClass('hidden');
+            $('.now-time').html(getNowTime());
+        } else {
+            $('.failed-save').removeClass('hidden');
+            $('.now-time').html(getNowTime());
+        }
     });
+
+    function getNowTime() {
+        var now = new Date();
+
+        var month = now.getMonth() + 1;
+        var day = now.getDate();
+        var hour = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        return "(" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds + ")"
+    }
 
 });

@@ -1,7 +1,19 @@
 .articles {
-  .new {
+  .edit {
     .container {
       max-width: 1500px;
+    }
+    .saving {
+      color: #FFCC00;
+      font-weight: bold;
+    }
+    .saved {
+      color: #00FF00;
+      font-weight: bold;
+    }
+    .failed-save {
+      color: #FF0000;
+      font-weight: bold;
     }
   }
 }
