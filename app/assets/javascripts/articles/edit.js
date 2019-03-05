@@ -27,12 +27,11 @@ $(document).on('turbolinks:load', function() {
 
     // 記事を編集するごとにsetTimeoutをリセット
     $('.form-group').on('change',function(e) {
-        console.log(e);
         clearTimeout(timer_id);
         timer_id = setTimeout(ajaxAutoSave, 5000);
     });
 
-    //  CKEditor インスタンスの準備完了をキャッチ
+    //  CKEditorにおける自動保存
     CKEDITOR.on('instanceReady', function(e) {
         var editor = e.editor;
 
@@ -40,6 +39,10 @@ $(document).on('turbolinks:load', function() {
             clearTimeout(timer_id);
             timer_id = setTimeout(ajaxAutoSave, 5000);
         });
+    });
+
+    $(document).on('ajax:success', ".ajax-form", function(e) {
+        console.log(e.detail[0]);
     });
 
 });

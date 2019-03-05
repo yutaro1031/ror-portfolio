@@ -64,13 +64,14 @@ class ArticlesController < ApplicationController
 
   def article_params
     # フォームの構造を変えた時、permitするparamも変える
-    params.require(:article).permit(:user_id, :title, :text, :eyecatch, :tmp_title, :tmp_text, :tmp_eyecatch, tag_ids: [])
+    params.require(:article).permit(:user_id, :title, :text, :eyecatch, :tmp_title, :tmp_text, :tmp_eyecatch, :remove_eyecatch, tag_ids: [])
   end
 
   def tmp_article_params
     params = article_params
     params = change_params_to_tmp(params, 'title') if params[:title]
-    change_params_to_tmp(params, 'text') if params[:text]
+    params = change_params_to_tmp(params, 'text') if params[:text]
+    params
   end
 
   def change_params_to_tmp(params, col_name)
