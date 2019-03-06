@@ -32,26 +32,17 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    binding.pry
     case article_params[:update_type]
-
     when 'tmp' # 下書き保存
       update_article(tmp_article_params)
-
     when 'publish' # 公開設定(タグもそこで行う)
       update_article(publish_article_params)
-
-    when 'eyecatch' # アイキャッチ画像
-      if article_params[:remove_tmp_eyecatch_flg]
-        remove_eyecatch(true)
-      elsif article_params[:remove_eyecatch_flg]
-        remove_eyecatch(false)
-      else
-        render json: {result: "error: nothing remove_flg"}
-      end
-
     else render json: {result: "error: nothing change_type"}
     end
+  end
+
+  def ajax_remove_eyecatch
+    # パラメータの値によってtmpか否かを決める
   end
 
   private
@@ -70,8 +61,6 @@ class ArticlesController < ApplicationController
                                     :tmp_title,
                                     :tmp_text,
                                     :tmp_eyecatch,
-                                    :remove_eyecatch_flg,
-                                    :remove_tmp_eyecatch_flg,
                                     :publish_flg,
                                     :update_type,
                                     tag_ids: [])
@@ -97,8 +86,8 @@ class ArticlesController < ApplicationController
     params[:tmp_title] = nil
     params[:tmp_text] = nil
     params[:tmp_eyecatch] = nil
-    # ↓いずれいらなくなるかも
-    params.except(:remove_eyecatch_flg, :remove_tmp_eyecatch_flg, :update_type)
+
+    params.except(:update_type)
   end
 
   def update_article(params)

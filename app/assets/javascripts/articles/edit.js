@@ -28,7 +28,7 @@ $(document).on('turbolinks:load', function() {
     clearTimeout(timer_id);
 
     // 記事を編集するごとにsetTimeoutをリセット
-    $('.form-group').on('change',function() {
+    $('#ajax-form-tmp > .form-group').on('change',function() {
         clearTimeout(timer_id);
         timer_id = setTimeout(ajaxAutoSave, 5000);
     });

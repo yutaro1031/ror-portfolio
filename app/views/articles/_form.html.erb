@@ -1,68 +1,73 @@
 <div class="row">
-<%= form_with model: article, id: 'ajax-form-tmp' do |f| %>
-  <div class="form-group">
-    <%= f.hidden_field :user_id, value: current_user.id, class: 'form-control' %>
-    <%= f.hidden_field :update_type, value: "tmp", class: 'form-control' %>
-  </div>
+  <div class="col-sm-9 col-lg-9">
+    <%= form_with model: article, id: 'ajax-form-tmp' do |f| %>
+      <%= f.hidden_field :update_type, value: "tmp", class: 'form-control' %>
 
-  <div class="form-group">
-    <%= f.label :title, 'タイトル' %>
+      <div class="form-group">
+        <%= f.label :title, 'タイトル' %>
 
-    <% if article.tmp_title? %>
-      <%= f.text_field :tmp_title, class: 'form-control' %>
-    <% else %>
-      <%= f.text_field :title, class: 'form-control' %>
-    <% end %>
-  </div>
-
-  <div class="form-group">
-    <span>タグ</span>
-    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
-      <div class="form-check">
-        <%= tag.label class: 'form-check-label' do %>
-          <%= tag.check_box class: 'form-check-input' %>
-          <%= tag.text %>
+        <% if article.tmp_title? %>
+          <%= f.text_field :tmp_title, class: 'form-control' %>
+        <% else %>
+          <%= f.text_field :title, class: 'form-control' %>
         <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :text, '本文' %>
+        <% if article.tmp_text? %>
+          <%= f.cktext_area :tmp_text, class: 'form-control' %>
+        <% else %>
+          <%= f.cktext_area :text, class: 'form-control' %>
+        <% end %>
+      </div>
+
+      <div class="save-info">
+        <div class="hidden saving">保存中...<span class="now-time"></span></div>
+        <div class="hidden saved">保存完了しました<span class="now-time"></span></div>
+        <div class="hidden failed-save">保存失敗しました<span class="now-time"></span></div>
       </div>
     <% end %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :text, '本文' %>
-    <% if article.tmp_text? %>
-      <%= f.cktext_area :tmp_text, class: 'form-control' %>
-    <% else %>
-      <%= f.cktext_area :text, class: 'form-control' %>
-    <% end %>
-  </div>
+  <div class="col-sm-3 col-lg-3">
+    <%= form_with model: article, id: 'ajax-form-publish' do |f| %>
+      <%= f.hidden_field :update_type, value: "publish", class: 'form-control' %>
+      <div class="form-group">
+        <label><%= f.radio_button :publish_flg, true %> 公開 </label>
+        <label><%= f.radio_button :publish_flg, false %> 非公開 </label>
+      </div>
 
-  <div class="save-info">
-    <div class="hidden saving">保存中...<span class="now-time"></span></div>
-    <div class="hidden saved">保存完了しました<span class="now-time"></span></div>
-    <div class="hidden failed-save">保存失敗しました<span class="now-time"></span></div>
-  </div>
-
-  <div class="form-group">
-    <img id="eyecatch_img_prev" src="#" class="hidden" alt="アイキャッチ画像"/>
-
-    <% if article.tmp_eyecatch? %>
-      <%= image_tag article.tmp_eyecatch.to_s, class: 'eyecatch_present_img' %>
-      <label><%= f.check_box :remove_eyecatch_flg %></label>
-    <% elsif article.eyecatch? %>
-      <%= image_tag article.eyecatch.to_s, class: 'eyecatch_present_img' %>
-      <label><%= f.check_box :remove_tmp_eyecatch_flg %></label>
+      <div class="form-group">
+        <span>タグ</span>
+        <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+          <div class="form-check">
+            <%= tag.label class: 'form-check-label' do %>
+              <%= tag.check_box class: 'form-check-input' %>
+              <%= tag.text %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <%= f.submit "更新する", class: 'btn btn-primary' %>
     <% end %>
 
-    <%= f.label :tmp_eyecatch, 'アイキャッチ画像' %>
-    <%= f.file_field :tmp_eyecatch, class: 'post-img'%>
+    <%= form_with model: article, id: 'ajax-form-tmp' do |f| %>
+      <%= f.hidden_field :update_type, value: "eyecatch", class: 'form-control' %>
+      <div class="form-group">
+        <img id="eyecatch_img_prev" src="#" class="hidden" alt="アイキャッチ画像"/>
+
+        <% if article.tmp_eyecatch? %>
+          <%= image_tag article.tmp_eyecatch.to_s, class: 'eyecatch_present_img' %>
+        <% elsif article.eyecatch? %>
+          <%= image_tag article.eyecatch.to_s, class: 'eyecatch_present_img' %>
+        <% end %>
+
+        <%= f.label :tmp_eyecatch, 'アイキャッチ画像' %>
+        <%= f.file_field :tmp_eyecatch, class: 'post-img'%>
+      </div>
+    <% end %>
   </div>
-
-  <%= f.submit "更新する", class: 'btn btn-primary' %>
-<% end %>
-
-<%= form_with model: article, id: 'ajax-form' do |f| %>
-
-<% end %>
 </div>
 
 <%= javascript_include_tag 'articles/edit.js' %>
