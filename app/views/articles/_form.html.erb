@@ -46,10 +46,10 @@
 
     <% if article.tmp_eyecatch? %>
       <%= image_tag article.tmp_eyecatch.to_s, class: 'eyecatch_present_img' %>
-      <label><%= f.check_box :remove_eyecatch %></label>
+      <label><%= f.check_box :remove_eyecatch_flg %></label>
     <% elsif article.eyecatch? %>
       <%= image_tag article.eyecatch.to_s, class: 'eyecatch_present_img' %>
-      <label><%= f.check_box :remove_tmp_eyecatch %></label>
+      <label><%= f.check_box :remove_tmp_eyecatch_flg %></label>
     <% end %>
 
     <%= f.label :tmp_eyecatch, 'アイキャッチ画像' %>
