@@ -19,7 +19,7 @@ $(document).on('turbolinks:load', function() {
 
     // 自動保存機能
     function ajaxAutoSave() {
-        Rails.fire($(".ajax-form")[0], "submit");
+        Rails.fire($("#ajax-form-tmp")[0], "submit");
         $('.saving').removeClass('hidden');
     }
 
@@ -43,7 +43,7 @@ $(document).on('turbolinks:load', function() {
         });
     });
 
-    $(document).on('ajax:success', ".ajax-form", function(e) {
+    $(document).on('ajax:success', "#ajax-form-tmp", function(e) {
         $('.saving').addClass('hidden');
         if (e.detail[0].result === "ok") {
             $('.saved').removeClass('hidden');

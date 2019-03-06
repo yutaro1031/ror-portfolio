@@ -88,15 +88,15 @@ class ArticlesController < ApplicationController
     params = article_params
     params[:publish_flg] = ActiveRecord::Type::Boolean.new.cast(params[:publish_flg])
     params[:title] = params[:tmp_title] if params[:tmp_title]
-    params[:tmp_title] = nil
     params[:text] = params[:tmp_text] if params[:tmp_text]
-    params[:tmp_text] = nil
     if params[:tmp_eyecatch]
       @article.remove_eyecatch!
       @article.save
       params[:eyecatch] = params[:tmp_eyecatch]
-      params[:tmp_eyecatch] = nil
     end
+    params[:tmp_title] = nil
+    params[:tmp_text] = nil
+    params[:tmp_eyecatch] = nil
     # ↓いずれいらなくなるかも
     params.except(:remove_eyecatch_flg, :remove_tmp_eyecatch_flg, :update_type)
   end
