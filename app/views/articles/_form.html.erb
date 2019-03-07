@@ -52,8 +52,8 @@
       <%= f.submit "更新する", class: 'btn btn-primary' %>
     <% end %>
 
-    <%= form_with model: article, id: 'ajax-form-tmp' do |f| %>
-      <%= f.hidden_field :update_type, value: "eyecatch", class: 'form-control' %>
+    <%= form_with model: article, id: 'ajax-form-image' do |f| %>
+      <%= f.hidden_field :update_type, value: "tmp", class: 'form-control' %>
       <div class="form-group">
         <img id="eyecatch_img_prev" src="#" class="hidden" alt="アイキャッチ画像"/>
 
@@ -67,6 +67,7 @@
         <%= f.file_field :tmp_eyecatch, class: 'post-img'%>
       </div>
     <% end %>
+    ここにボタン配置！！
   </div>
 </div>
 

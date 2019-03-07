@@ -18,9 +18,13 @@ $(document).on('turbolinks:load', function() {
     });
 
     // 自動保存機能
-    function ajaxAutoSave() {
-        Rails.fire($("#ajax-form-tmp")[0], "submit");
-        $('.saving').removeClass('hidden');
+    function ajaxAutoSave(form_id) {
+        if (typeof form_id == 'undefined') {
+            Rails.fire($('#ajax-form-tmp')[0], "submit");
+            $('.saving').removeClass('hidden');
+        } else {
+            Rails.fire($(form_id)[0], "submit");
+        }
     }
 
     // 5秒後に自動保存(ページ遷移時に保存されないように即停止)
@@ -31,6 +35,10 @@ $(document).on('turbolinks:load', function() {
     $('#ajax-form-tmp > .form-group').on('change',function() {
         clearTimeout(timer_id);
         timer_id = setTimeout(ajaxAutoSave, 5000);
+    });
+
+    $('#ajax-form-image > .form-group').on('change',function() {
+       ajaxAutoSave('#ajax-form-image');
     });
 
     //  CKEditorにおける自動保存
@@ -52,6 +60,14 @@ $(document).on('turbolinks:load', function() {
             $('.failed-save').removeClass('hidden');
             $('.now-time').html(getNowTime());
         }
+    });
+
+    $(document).on('ajax:success', "#ajax-form-image", function(e) {
+        console.log(e.detail[0].result);
+    });
+
+    $(document).on('ajax:success', "#ajax-form-publish", function(e) {
+        console.log(e.detail[0].result);
     });
 
     function getNowTime() {
