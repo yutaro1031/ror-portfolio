@@ -74,8 +74,11 @@ $(document).on('turbolinks:load', function() {
     }
 
     $(document).on('ajax:success', "#ajax-form-publish", function(e) {
-        // 画像の挙動を考える
-        console.log(e.detail[0].result);
+        if ($('.eyecatch_present_img').attr('src') !== "#" || $('#eyecatch_img_prev').is()) {
+            var btn = $('#delete-eyecatch-btn');
+            btn.prop('disabled', false);
+            btn.attr('value', '画像を削除する');
+        }
     });
 
     $(document).on('ajax:success', "#ajax-form-add-eyecatch", function(e) {
