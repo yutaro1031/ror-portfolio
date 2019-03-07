@@ -62,24 +62,6 @@ $(document).on('turbolinks:load', function() {
         }
     });
 
-    $(document).on('ajax:success', "#ajax-form-publish", function(e) {
-        console.log(e.detail[0].result);
-    });
-
-    $(document).on('ajax:success', "#ajax-form-add-eyecatch", function(e) {
-        console.log(e.detail[0].result);
-    });
-
-    $(document).on('ajax:success', "#ajax-form-remove-eyecatch", function(e) {
-        console.log(e.detail[0].result);
-        if (e.detail[0].result === "removed_tmp_eyecatch") {
-
-        } else if (e.detail[0].result === "removed_eyecatch") {
-
-        }
-
-    });
-
     function getNowTime() {
         var now = new Date();
 
@@ -89,6 +71,42 @@ $(document).on('turbolinks:load', function() {
         var minutes = now.getMinutes();
         var seconds = now.getSeconds();
         return "(" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds + ")"
+    }
+
+    $(document).on('ajax:success', "#ajax-form-publish", function(e) {
+        // 画像の挙動を考える
+        console.log(e.detail[0].result);
+    });
+
+    $(document).on('ajax:success', "#ajax-form-add-eyecatch", function(e) {
+        var btn = $('#delete-eyecatch-btn');
+        btn.prop('disabled', false);
+        btn.attr('value', '下書き画像を削除する');
+    });
+
+    $(document).on('ajax:success', "#ajax-form-remove-eyecatch", function(e) {
+        var result = e.detail[0].result;
+        var eyecatch_image_path = e.detail[0].eyecatch_image_path;
+        var btn = $('#delete-eyecatch-btn');
+        if (result === "removed_tmp_eyecatch") {
+            if (eyecatch_image_path == null) {
+                timer_id = setTimeout(removeBtnDisabled, 1000); //仕様上disabledにならない問題を回避
+                $('.eyecatch_present_img, #eyecatch_img_prev').attr('src', '#');
+            } else {
+                btn.prop('disabled', false); // この属性を指定しないとvalue属性値を変えることができない
+                btn.attr('value', '画像を削除する');
+                $('.eyecatch_present_img, #eyecatch_img_prev').attr('src', eyecatch_image_path);
+            }
+        } else if (result === "removed_eyecatch") {
+            btn.prop('disabled', true);
+            $('.eyecatch_present_img, #eyecatch_img_prev').attr('src', '#');
+        }
+    });
+
+    function removeBtnDisabled() {
+        var btn = $('#delete-eyecatch-btn');
+        btn.prop('disabled', true);
+        btn.attr('value', '画像を削除する');
     }
 
 });

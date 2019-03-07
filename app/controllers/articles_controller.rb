@@ -76,7 +76,7 @@ class ArticlesController < ApplicationController
     params[:publish_flg] = ActiveRecord::Type::Boolean.new.cast(params[:publish_flg])
     params[:title] = params[:tmp_title] if params[:tmp_title]
     params[:text] = params[:tmp_text] if params[:tmp_text]
-    if @article.tmp_eyecatch
+    if @article[:tmp_eyecatch]
       @article.remove_eyecatch!
       @article.eyecatch = @article.tmp_eyecatch.file
       @article.remove_tmp_eyecatch!
@@ -96,16 +96,17 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def remove_eyecatch
-    if @article.tmp_eyecatch
-      @article.remove_tmp_eyecatch!
+  def ajax_remove_eyecatch
+    if @article[:tmp_eyecatch]
       result_message = "removed_tmp_eyecatch"
-    elsif @article.eyecatch
-      @article.remove_eyecatch!
+      eyecatch_image_path = @article.eyecatch.to_s# if @article[:eyecatch]
+      @article.remove_tmp_eyecatch!
+    else
       result_message = "removed_eyecatch"
+      @article.remove_eyecatch!
     end
     if @article.save
-      render json: {result: result_message}
+      render json: {result: result_message, eyecatch_image_path: eyecatch_image_path}
     else
       render json: {result: "error"}
     end
