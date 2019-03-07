@@ -37,8 +37,8 @@ $(document).on('turbolinks:load', function() {
         timer_id = setTimeout(ajaxAutoSave, 5000);
     });
 
-    $('#ajax-form-image > .form-group').on('change',function() {
-       ajaxAutoSave('#ajax-form-image');
+    $('#ajax-form-add-eyecatch > .form-group').on('change',function() {
+       ajaxAutoSave('#ajax-form-add-eyecatch');
     });
 
     //  CKEditorにおける自動保存
@@ -62,12 +62,22 @@ $(document).on('turbolinks:load', function() {
         }
     });
 
-    $(document).on('ajax:success', "#ajax-form-image", function(e) {
+    $(document).on('ajax:success', "#ajax-form-publish", function(e) {
         console.log(e.detail[0].result);
     });
 
-    $(document).on('ajax:success', "#ajax-form-publish", function(e) {
+    $(document).on('ajax:success', "#ajax-form-add-eyecatch", function(e) {
         console.log(e.detail[0].result);
+    });
+
+    $(document).on('ajax:success', "#ajax-form-remove-eyecatch", function(e) {
+        console.log(e.detail[0].result);
+        if (e.detail[0].result === "removed_tmp_eyecatch") {
+
+        } else if (e.detail[0].result === "removed_eyecatch") {
+
+        }
+
     });
 
     function getNowTime() {

@@ -52,7 +52,7 @@
       <%= f.submit "更新する", class: 'btn btn-primary' %>
     <% end %>
 
-    <%= form_with model: article, id: 'ajax-form-image' do |f| %>
+    <%= form_with model: article, id: 'ajax-form-add-eyecatch' do |f| %>
       <%= f.hidden_field :update_type, value: "tmp", class: 'form-control' %>
       <div class="form-group">
         <img id="eyecatch_img_prev" src="#" class="hidden" alt="アイキャッチ画像"/>
@@ -67,7 +67,18 @@
         <%= f.file_field :tmp_eyecatch, class: 'post-img'%>
       </div>
     <% end %>
-    ここにボタン配置！！
+
+    <%= form_with model: article, id: 'ajax-form-remove-eyecatch' do |f| %>
+      <%= f.hidden_field :update_type, value: "remove-eyecatch", class: 'form-control' %>
+      <% if article.tmp_eyecatch? %>
+        <%= f.submit "下書き画像を削除する", confirm: '本当に削除しますか？', class: 'btn btn-danger' %>
+      <% elsif article.eyecatch? %>
+        <%= f.submit "画像を削除する", confirm: '本当に削除しますか？',class: 'btn btn-danger' %>
+      <% else %>
+        <%= f.submit "画像を削除する", :disabled, class: 'btn btn-danger' %>
+      <% end %>
+    <% end %>
+
   </div>
 </div>
 

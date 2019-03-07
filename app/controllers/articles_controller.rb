@@ -38,12 +38,10 @@ class ArticlesController < ApplicationController
       update_article(tmp_article_params)
     when 'publish' # 公開設定(タグもそこで行う)
       update_article(publish_article_params)
+    when 'remove-eyecatch'
+      ajax_remove_eyecatch
     else render json: {result: "error: nothing change_type"}
     end
-  end
-
-  def ajax_remove_eyecatch
-    # パラメータの値によってtmpか否かを決める
   end
 
   private
@@ -54,7 +52,6 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    # フォームの構造を変えた時、permitするparamも変える
     params.require(:article).permit(:user_id,
                                     :title,
                                     :text,
@@ -67,14 +64,14 @@ class ArticlesController < ApplicationController
                                     tag_ids: [])
   end
 
-  def tmp_article_params
+  def tmp_article_params # 下書き保存用のparams
     params = article_params
     params[:tmp_title] = params[:title] if params[:title]
     params[:tmp_text] = params[:text] if params[:text]
     params.slice(:tmp_title, :tmp_text, :tmp_eyecatch)
   end
 
-  def publish_article_params
+  def publish_article_params # 記事公開用のparams
     params = article_params
     params[:publish_flg] = ActiveRecord::Type::Boolean.new.cast(params[:publish_flg])
     params[:title] = params[:tmp_title] if params[:tmp_title]
@@ -99,14 +96,16 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def remove_eyecatch(tmp)
-    if tmp
+  def remove_eyecatch
+    if @article.tmp_eyecatch
       @article.remove_tmp_eyecatch!
-    else
+      result_message = "removed_tmp_eyecatch"
+    elsif @article.eyecatch
       @article.remove_eyecatch!
+      result_message = "removed_eyecatch"
     end
     if @article.save
-      render json: {result: "ok"}
+      render json: {result: result_message}
     else
       render json: {result: "error"}
     end
