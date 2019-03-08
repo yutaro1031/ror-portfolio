@@ -32,7 +32,6 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    binding.pry
     case article_params[:update_type]
     when 'tmp' # 下書き保存
       update_article(tmp_article_params)

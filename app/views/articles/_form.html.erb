@@ -49,6 +49,10 @@
           </div>
         <% end %>
       </div>
+      <div id="edited-list">
+        <p id="edited-title-or-text" class="edited <%= 'hidden' if article[:tmp_title] || article[:tmp_text] %>">タイトルまたは本文が編集されています</p>
+        <p id="edited-eyecatch" class="edited <%= 'hidden' if article[:tmp_article] %>">アイキャッチ画像が編集されています</p>
+      </div>
       <%= f.submit "更新する", class: 'btn btn-primary' %>
     <% end %>
 
