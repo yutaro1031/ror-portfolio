@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
     // 画像のプレビュー
     function readURL(input) {
         if (input.files && input.files[0]) {
-            var reader = new FileReader();
+            let reader = new FileReader();
 
             reader.onload = function (e) {
                 $('#eyecatch_img_prev').attr('src', e.target.result);
@@ -43,7 +43,7 @@ $(document).on('turbolinks:load', function() {
 
     //  CKEditorにおける自動保存
     CKEDITOR.on('instanceReady', function(e) {
-        var editor = e.editor;
+        let editor = e.editor;
 
         editor.on('change', function() {
             clearTimeout(timer_id);
@@ -61,40 +61,43 @@ $(document).on('turbolinks:load', function() {
             $('.failed-save').removeClass('hidden');
             $('.now-time').html(getNowTime());
         }
+        changeAllDisabled(false);
     });
 
     function getNowTime() {
-        var now = new Date();
+        let now = new Date();
 
-        var month = now.getMonth() + 1;
-        var day = now.getDate();
-        var hour = now.getHours();
-        var minutes = now.getMinutes();
-        var seconds = now.getSeconds();
+        let month = now.getMonth() + 1;
+        let day = now.getDate();
+        let hour = now.getHours();
+        let minutes = now.getMinutes();
+        let seconds = now.getSeconds();
         return "(" + month + "/" + day + " " + hour + ":" + minutes + ":" + seconds + ")"
     }
 
     $(document).on('ajax:success', "#ajax-form-publish", function(e) {
         if ($('.eyecatch_present_img').attr('src') !== "#" || $('#eyecatch_img_prev').is()) {
-            var btn = $('#delete-eyecatch-btn');
+            let btn = $('#delete-eyecatch-btn');
             btn.prop('disabled', false);
             btn.attr('value', '画像を削除する');
         }
         $(".edited").each(function() {
             $(this).addClass('hidden');
         });
+        changeAllDisabled(false);
     });
 
     $(document).on('ajax:success', "#ajax-form-add-eyecatch", function(e) {
-        var btn = $('#delete-eyecatch-btn');
+        let btn = $('#delete-eyecatch-btn');
         btn.prop('disabled', false);
         btn.attr('value', '下書き画像を削除する');
 
         updateEdited($('#edited-eyecatch'));
+        changeAllDisabled(false);
     });
 
     $(document).on('ajax:success', "#ajax-form-remove-eyecatch", function(e) {
-        var result = e.detail[0].result;
+        let result = e.detail[0].result;
         var eyecatch_image_path = e.detail[0].eyecatch_image_path;
         var btn = $('#delete-eyecatch-btn');
         if (result === "removed_tmp_eyecatch") {
@@ -115,10 +118,11 @@ $(document).on('turbolinks:load', function() {
         if (!edited_elem.hasClass('hidden')) {
             edited_elem.addClass('hidden');
         }
+        changeAllDisabled(false);
     });
 
     function removeBtnDisabled() {
-        var btn = $('#delete-eyecatch-btn');
+        let btn = $('#delete-eyecatch-btn');
         btn.prop('disabled', true);
         btn.attr('value', '画像を削除する');
     }
@@ -127,6 +131,16 @@ $(document).on('turbolinks:load', function() {
         if (elem.hasClass('hidden')) {
             elem.removeClass('hidden');
         }
+    }
+
+    $('.ajax-form').submit(function() {
+        changeAllDisabled(true);
+    });
+    
+    function changeAllDisabled(state) {
+        $(".ajax-submit").each(function() {
+            $(this).prop('disabled', state);
+        });
     }
 
 });

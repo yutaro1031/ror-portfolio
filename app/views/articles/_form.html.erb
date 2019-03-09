@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-9 col-lg-9">
-    <%= form_with model: article, id: 'ajax-form-tmp' do |f| %>
+    <%= form_with model: article, class: 'ajax-form', id: 'ajax-form-tmp' do |f| %>
       <%= f.hidden_field :update_type, value: "tmp", class: 'form-control' %>
 
       <div class="form-group">
@@ -30,7 +30,7 @@
   </div>
 
   <div class="col-sm-3 col-lg-3">
-    <%= form_with model: article, id: 'ajax-form-publish' do |f| %>
+    <%= form_with model: article, class: 'ajax-form', id: 'ajax-form-publish' do |f| %>
       <%= f.hidden_field :update_type, value: "publish", class: 'form-control' %>
       <div class="form-group">
         <label><%= f.radio_button :publish_flg, true %> 公開 </label>
@@ -52,10 +52,10 @@
         <p id="edited-title-or-text" class="edited <%= 'hidden' if article[:tmp_title] || article[:tmp_text] %>">タイトルまたは本文が編集されています</p>
         <p id="edited-eyecatch" class="edited <%= 'hidden' if article[:tmp_article] %>">アイキャッチ画像が編集されています</p>
       </div>
-      <%= f.submit "更新する", class: 'btn btn-primary' %>
+      <%= f.submit "更新する", class: 'ajax-submit btn btn-primary' %>
     <% end %>
 
-    <%= form_with model: article, id: 'ajax-form-add-eyecatch' do |f| %>
+    <%= form_with model: article, class: 'ajax-form', id: 'ajax-form-add-eyecatch' do |f| %>
       <%= f.hidden_field :update_type, value: "tmp", class: 'form-control' %>
       <div class="form-group">
         <img id="eyecatch_img_prev" src="#" class="hidden" alt="アイキャッチ画像"/>
@@ -71,14 +71,14 @@
       </div>
     <% end %>
 
-    <%= form_with model: article, id: 'ajax-form-remove-eyecatch' do |f| %>
+    <%= form_with model: article, class: 'ajax-form', id: 'ajax-form-remove-eyecatch' do |f| %>
       <%= f.hidden_field :update_type, value: "remove-eyecatch", class: 'form-control' %>
       <% if article[:tmp_eyecatch] %>
-        <%= f.submit "下書き画像を削除する", id: 'delete-eyecatch-btn', class: 'btn btn-danger' %>
+        <%= f.submit "下書き画像を削除する", id: 'delete-eyecatch-btn', class: 'ajax-submit btn btn-danger' %>
       <% elsif article[:eyecatch] %>
-        <%= f.submit "画像を削除する", id: 'delete-eyecatch-btn', class: 'btn btn-danger' %>
+        <%= f.submit "画像を削除する", id: 'delete-eyecatch-btn', class: 'ajax-submit btn btn-danger' %>
       <% else %>
-        <%= f.submit "画像を削除する", disabled: true, id: 'delete-eyecatch-btn', class: 'btn btn-danger' %>
+        <%= f.submit "画像を削除する", disabled: true, id: 'delete-eyecatch-btn', class: 'ajax-submit btn btn-danger' %>
       <% end %>
     <% end %>
 
