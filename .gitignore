@@ -29,3 +29,6 @@
 # Rubymine関連
 .idea/**/workspace.xml
 .idea/**/tasks.xml
+
+# 画像
+public/uploads
