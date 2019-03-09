@@ -1,3 +1,4 @@
+CKEDITOR.config.height=500;
 $(document).on('turbolinks:load', function() {
     // 画像のプレビュー
     function readURL(input) {
@@ -102,14 +103,14 @@ $(document).on('turbolinks:load', function() {
         if (result === "removed_tmp_eyecatch") {
             if (!eyecatch_image_path) {
                 timer_id = setTimeout(removeBtnDisabled, 1000); //仕様上disabledにならない問題を回避
-                $('.eyecatch_present_img, #eyecatch_img_prev').attr('src', '#');
+                $('.eyecatch_present_img, #eyecatch_img_prev').attr('src', '/no-image.png');
             } else {
                 changeSubmitState('#delete-eyecatch-btn', false, "画像を削除する");
                 $('.eyecatch_present_img, #eyecatch_img_prev').attr('src', eyecatch_image_path);
             }
         } else if (result === "removed_eyecatch") {
             timer_id = setTimeout(removeBtnDisabled, 1000); //仕様上disabledにならない問題を回避
-            $('.eyecatch_present_img, #eyecatch_img_prev').attr('src', '#');
+            $('.eyecatch_present_img, #eyecatch_img_prev').attr('src', '/no-image.png');
         }
 
         var edited_elem = $('#edited-eyecatch');
@@ -146,5 +147,9 @@ $(document).on('turbolinks:load', function() {
             elem.removeClass('hidden');
         }
     }
+
+    $(document).on('click', '.upload-file-btn', function() {
+        $(".post-img").click();
+    })
 
 });
