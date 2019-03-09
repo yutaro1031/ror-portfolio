@@ -5,7 +5,7 @@
 
       <div class="form-group">
         <%= f.label :title, 'タイトル' %>
-        <% if article[:tmp_title] %>
+        <% if article[:tmp_title] %>e
           <%= f.text_field :tmp_title, class: 'form-control' %>
         <% else %>
           <%= f.text_field :title, class: 'form-control' %>
@@ -81,6 +81,8 @@
         <%= f.submit "画像を削除する", disabled: true, id: 'delete-eyecatch-btn', class: 'btn btn-danger' %>
       <% end %>
     <% end %>
+
+    <%= link_to '記事を削除する', article, class: 'btn btn-danger', method: :delete %>
 
   </div>
 </div>

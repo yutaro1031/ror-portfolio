@@ -43,6 +43,11 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def destroy
+    @article.destroy
+    redirect_to articles_path, alert: "記事を削除しました"
+  end
+
   private
 
   def set_target_article
