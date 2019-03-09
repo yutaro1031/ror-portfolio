@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_223942) do
+ActiveRecord::Schema.define(version: 2019_03_08_002823) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.bigint "user_id"
     t.string "eyecatch"
     t.text "text", null: false
-    t.boolean "publish_flg", default: true, null: false
+    t.boolean "publish_flg", default: false, null: false
     t.boolean "del_flg", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
