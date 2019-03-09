@@ -46,19 +46,11 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe "GET #new" do
-    before do
+    it "302レスポンスが返ってくるか(管理者)" do
       user = FactoryBot.create(:user, :admin_user)
       login_user user
-    end
-
-    it "正常なレスポンスか" do
       get :new
-      expect(response).to be_successful
-    end
-
-    it "200レスポンスが返ってくるか" do
-      get :new
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status "302"
     end
 
     it "404レスポンスが返ってくるか(非管理者)" do
@@ -68,10 +60,6 @@ RSpec.describe ArticlesController, type: :controller do
       expect(response).to have_http_status "404"
     end
 
-    it ':newテンプレートをレンダリングしているか' do
-      get :new
-      expect(response).to render_template :new
-    end
   end
 
   describe "POST #create" do

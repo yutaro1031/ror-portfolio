@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    render_404 unless current_user && current_user.admin_flg
+    render_404 and return unless current_user && current_user.admin_flg
     @article = Article.new(
                           user_id: current_user.id,
                           title: "無題の記事",
@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
     # あらかじめinsertしておく
     unless @article.save
       flash[:alert] = "記事の作成に失敗しました"
-      redirect_to articles_path
+      redirect_to articles_path and return
     end
 
     redirect_to edit_article_path @article
