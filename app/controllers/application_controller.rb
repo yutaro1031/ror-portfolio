@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  rescue_from StandardError, with: :resque_exception
 
   # ストロングパラメータの設定
   def configure_permitted_parameters
@@ -16,6 +17,15 @@ class ApplicationController < ActionController::Base
 
   def after_sign_out_path_for(resource)
     articles_path
+  end
+
+  # エラーハンドリング
+  def resque_exception(error)
+    if error
+      logger.info "StandardError!: #{error.message}"
+      logger.info error.backtrace.join("\n")
+    end
+    render_404
   end
 
   def render_404

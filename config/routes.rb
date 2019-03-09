@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   root 'home#index'
   devise_for :users, controllers: {
       registrations: "users/registrations"
   }
 
-  resources :articles
+  resources :articles, except: [:create]
 
   get 'admin', to: 'admin#index'
 

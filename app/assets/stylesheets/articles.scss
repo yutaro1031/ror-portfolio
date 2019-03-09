@@ -1,0 +1,51 @@
+.articles {
+  .edit {
+    .container {
+      max-width: 1500px;
+      padding: 0 100px;
+    }
+    .saving {
+      color: #FFCC00;
+      font-weight: bold;
+    }
+    .saved {
+      color: #00FF00;
+      font-weight: bold;
+    }
+    .failed-save {
+      color: #FF0000;
+      font-weight: bold;
+    }
+    .form-group {
+      padding: 10px;
+    }
+    .form-side {
+      border: solid 2px;
+      margin-bottom: 20px;
+      h5 {
+        padding: 10px 0 10px 10px;
+        border-bottom: solid 2px;
+      }
+      #edited-list {
+        height: 100px;
+        font-size: 14px;
+        text-align: center;
+      }
+      .form-img {
+        margin: 10px;
+        height: 150px;
+        overflow: hidden;
+      }
+      .eyecatch_present_img, #eyecatch_img_prev {
+        max-width: 100%;
+      }
+      .btn {
+        display: inline-block;
+      }
+    }
+    .btn_wrap {
+      text-align: center;
+      margin: 10px 0;
+    }
+  }
+}

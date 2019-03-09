@@ -27,4 +27,8 @@
 /config/master.key
 
 # Rubymine関連
-.idea
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+
+# 画像
+public/uploads

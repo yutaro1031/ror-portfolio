@@ -11,32 +11,109 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    render_404 unless current_user.admin_flg
-    @article = Article.new(flash[:article])
+    render_404 and return unless current_user && current_user.admin_flg
+    @article = Article.new(
+                          user_id: current_user.id,
+                          title: "無題の記事",
+                          text: "ここに本文を入力してください",
+                          publish_flg: FALSE
+    )
+    # あらかじめinsertしておく
+    unless @article.save
+      flash[:alert] = "記事の作成に失敗しました"
+      redirect_to articles_path and return
+    end
+
+    redirect_to edit_article_path @article
   end
 
-  def create
-    article = Article.new(article_params)
-    if article.save
-      flash[:notice] = "「#{article.title}」の記事を作成しました"
-      redirect_to articles_path
-    else
-      redirect_to new_article_path, flash: {
-          article: article,
-          error_messages: ["記事の作成に失敗しました"]
-      }
+  def edit
+    render_404 unless current_user && current_user.admin_flg
+  end
+
+  def update
+    case article_params[:update_type]
+    when 'tmp' # 下書き保存
+      update_article(tmp_article_params)
+    when 'publish' # 公開設定(タグもそこで行う)
+      update_article(publish_article_params)
+    when 'remove-eyecatch'
+      ajax_remove_eyecatch
+    else render json: {result: "error: nothing change_type"}
     end
+  end
+
+  def destroy
+    @article.destroy
+    redirect_to articles_path, alert: "記事を削除しました"
   end
 
   private
 
-  def article_params
-    params.require(:article).permit(:user_id, :title, :text, tag_ids: [])
-  end
-
   def set_target_article
     @article = Article.find(params[:id])
     render_404 if @article.del_flg # 削除された記事は404
+  end
+
+  def article_params
+    params.require(:article).permit(:user_id,
+                                    :title,
+                                    :text,
+                                    :eyecatch,
+                                    :tmp_title,
+                                    :tmp_text,
+                                    :tmp_eyecatch,
+                                    :publish_flg,
+                                    :update_type,
+                                    tag_ids: [])
+  end
+
+  def tmp_article_params # 下書き保存用のparams
+    params = article_params
+    params[:tmp_title] = params[:title] if params[:title]
+    params[:tmp_text] = params[:text] if params[:text]
+    params.slice(:tmp_title, :tmp_text, :tmp_eyecatch)
+  end
+
+  def publish_article_params # 記事公開用のparams
+    params = article_params
+    params[:publish_flg] = ActiveRecord::Type::Boolean.new.cast(params[:publish_flg])
+    params[:title] = params[:tmp_title] if params[:tmp_title]
+    params[:text] = params[:tmp_text] if params[:tmp_text]
+    if @article[:tmp_eyecatch]
+      @article.remove_eyecatch!
+      @article.eyecatch = @article.tmp_eyecatch.file
+      @article.remove_tmp_eyecatch!
+      @article.save
+    end
+    params[:tmp_title] = nil
+    params[:tmp_text] = nil
+
+    params.except(:update_type)
+  end
+
+  def update_article(params)
+    if @article.update(params)
+      render json: {result: "ok"}
+    else
+      render json: {result: "error"}
+    end
+  end
+
+  def ajax_remove_eyecatch
+    if @article[:tmp_eyecatch]
+      result_message = "removed_tmp_eyecatch"
+      eyecatch_image_path = @article.eyecatch.to_s# if @article[:eyecatch]
+      @article.remove_tmp_eyecatch!
+    else
+      result_message = "removed_eyecatch"
+      @article.remove_eyecatch!
+    end
+    if @article.save
+      render json: {result: result_message, eyecatch_image_path: eyecatch_image_path}
+    else
+      render json: {result: "error"}
+    end
   end
 
 end
