@@ -10,14 +10,12 @@ class ArticlesController < ApplicationController
     if params[:tag_id].present?
       @list_title = "「#{Tag.find(params[:tag_id]).name}」の記事一覧"
       @articles = Tag.find(params[:tag_id]).articles.where(find_params).order(created_at: "DESC")
+    elsif params[:q].present?
+      @list_title = "「#{params[:q]}」の検索結果"
+      @articles = Article.where(find_params).where("title LIKE ?", "%#{params[:q]}%").order(created_at: "DESC")
     else
-      if params[:q].present?
-        @list_title = "「#{params[:q]}」の検索結果"
-        @articles = Article.where(find_params).where("title LIKE ?", "%#{params[:q]}%").order(created_at: "DESC")
-      else
-        @list_title = "新着記事"
-        @articles = Article.where(find_params).order(created_at: "DESC")
-      end
+      @list_title = "新着記事"
+      @articles = Article.where(find_params).order(created_at: "DESC")
     end
     @articles = @articles.page(params[:page])
     @popular_articles = Article.where(del_flg: false).order(:pv).limit(5)
