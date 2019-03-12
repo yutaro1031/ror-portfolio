@@ -1,31 +1,45 @@
 <div id="tag_area" class="row">
-  <div class="tag_boxes col-md-3 col-6">
+  <div class="tag_boxes col-sm-3 col-6">
     <%= link_to image_tag('/ror4.jpg', class: 'tag_img'), articles_path(tag_id: 1) %>
   </div>
-  <div class="tag_boxes col-md-3 col-6">
+  <div class="tag_boxes col-sm-3 col-6">
     <%= link_to image_tag('/ror5.jpg', class: 'tag_img'), articles_path(tag_id: 2) %>
   </div>
-  <div class="tag_boxes col-md-3 col-6">
+  <div class="tag_boxes col-sm-3 col-6">
     <%= link_to image_tag('/python3.jpg', class: 'tag_img'), articles_path(tag_id: 4) %>
   </div>
-  <div class="tag_boxes col-md-3 col-6">
+  <div class="tag_boxes col-sm-3 col-6">
     <%= link_to image_tag('/django2.jpg', class: 'tag_img'), articles_path(tag_id: 5) %>
   </div>
 </div>
 
 <h3><%= @list_title %></h3>
 
-<table class="table table-hover boards__table">
-  <% @articles.each do |article| %>
-    <tr>
-      <th><%= article.id %></th>
-      <td><%= article.title %></td>
-      <td><%= article.eyecatch %></td>
-      <td><%= link_to '詳細', article, class: 'btn btn-outline-dark' %></td>
-      <td><%= article.updated_at %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="row">
+  <div class="col-md-9">
+    <ul id="article-list">
+      <% @articles.each do |article| %>
+        <li>
+          <%= link_to article do %>
+            <% if article.eyecatch.present? %>
+              <%= image_tag article.eyecatch.to_s, class: 'eyecatch_images' %>
+            <% else %>
+              <%= image_tag '/no-image.png', class: 'eyecatch_images' %>
+            <% end %>
+            <div class="article_info">
+              <h2><%= article.title %></h2>
+              <p class="article_meta"><%= article.updated_at.strftime("%Y年%m月%d日") %></p>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-md-3">
+<!--    アドセンスゾーン&人気の記事一覧-->
+  </div>
+</div>
 
 <%= paginate @articles %>
 

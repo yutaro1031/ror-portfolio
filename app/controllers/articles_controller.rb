@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
       @list_title = "新着記事"
       @articles = Article.where(find_params).order(created_at: "DESC")
     end
+
     @articles = @articles.page(params[:page])
     @popular_articles = Article.where(del_flg: false).order(:pv).limit(5)
   end
