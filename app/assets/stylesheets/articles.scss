@@ -1,11 +1,15 @@
 #articles {
   #index {
-    .tag_row {
-    }
-
     .tag_boxes {
-      display: inline-block;
-      border: solid 2px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      .tag_img {
+        max-width: 100%;
+        height: auto;
+      }
+      .tag_img:hover {
+        opacity: .6;
+      }
     }
   }
   #edit {
