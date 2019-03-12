@@ -7,8 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 if Rails.env == 'development'
-  # User.create(name: "admin", password: "password", password_confirmation: "password")
-  # User.create(name: "admin2", password: "password", password_confirmation: "password", admin_flg: TRUE)
   # Tag.create([
   #                { name: 'Ruby on Rails4' },
   #                { name: 'Ruby on Rails5' },
@@ -32,5 +30,30 @@ if Rails.env == 'development'
   # User.delete_all
   # user = User.create(name: "admin", email: "admin@gmail.com", password: "password", password_confirmation: "password", admin_flg: TRUE)
   # user.confirm
+
+=begin
+【メモ】
+Article.delete_all
+を行ったらできずにハマった。
+原因はdelete_allメソッドが関連づけられているレコードを考慮せずに実行するから。
+destroy_allであれば、ActiveRecordを介することで関連づけれらた他テーブルのレコードも同時に削除してくれる。
+
+=end
+
+  # Article.destroy_all
+
+  # (1..50).each do |i|
+  #   Article.create(title: "タイトル#{i}",
+  #                  user_id: 1,
+  #                  text: "本文#{i}",
+  #                  publish_flg: true,
+  #                  eyecatch: open("#{Rails.root}/db/fixtures/no-image.png")
+  #                  )
+  # end
+  #
+  # (1..50).each do |i|
+  #     TagRelation.create(article_id: i, tag_id: 3)
+  #     TagRelation.create(article_id: i, tag_id: 4)
+  #   end
 
 end

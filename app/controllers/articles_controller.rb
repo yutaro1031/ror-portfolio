@@ -3,8 +3,13 @@ class ArticlesController < ApplicationController
   before_action :set_target_article, only: %i[show edit update destroy]
   
   def index # 記事一覧を表示
-    @articles = Article.where(del_flg: FALSE)
+    if current_user && current_user.admin_flg
+      @articles = Article.where(del_flg: false)
+    else
+      @articles = Article.where(del_flg: false, publish_flg: true)
+    end
     @articles = @articles.page(params[:page])
+    @popular_articles = Article.where(del_flg: false).order(:pv).limit(5)
   end
 
   def show # 記事詳細画面
@@ -16,7 +21,6 @@ class ArticlesController < ApplicationController
                           user_id: current_user.id,
                           title: "無題の記事",
                           text: "ここに本文を入力してください",
-                          publish_flg: FALSE
     )
     # あらかじめinsertしておく
     unless @article.save

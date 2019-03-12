@@ -23,7 +23,7 @@ class Article < ApplicationRecord
 
   belongs_to :user
 
-  has_many :comments, dependent: :delete_all
-  has_many :tag_relations, dependent: :delete_all
+  has_many :comments, dependent: :destroy
+  has_many :tag_relations, dependent: :destroy
   has_many :tags, through: :tag_relations
 end
