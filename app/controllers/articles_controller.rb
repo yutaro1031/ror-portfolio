@@ -4,9 +4,9 @@ class ArticlesController < ApplicationController
   
   def index # 記事一覧を表示
     if current_user && current_user.admin_flg
-      @articles = Article.where(del_flg: false)
+      @articles = params[:tag_id].present? ? Tag.find(params[:tag_id]).articles : Article.where(del_flg: false)
     else
-      @articles = Article.where(del_flg: false, publish_flg: true)
+      @articles = params[:tag_id].present? ? Tag.find(params[:tag_id]).articles : Article.where(del_flg: false, publish_flg: true)
     end
     @articles = @articles.page(params[:page])
     @popular_articles = Article.where(del_flg: false).order(:pv).limit(5)
