@@ -46,6 +46,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    binding.pry
     case article_params[:update_type]
     when 'tmp' # 下書き保存
       update_article(tmp_article_params)
@@ -92,8 +93,8 @@ class ArticlesController < ApplicationController
   def publish_article_params # 記事公開用のparams
     params = article_params
     params[:publish_flg] = ActiveRecord::Type::Boolean.new.cast(params[:publish_flg])
-    params[:title] = params[:tmp_title] if params[:tmp_title]
-    params[:text] = params[:tmp_text] if params[:tmp_text]
+    params[:title] = @article[:tmp_title] if @article[:tmp_title]
+    params[:text] = @article[:tmp_text] if @article[:tmp_text]
     if @article[:tmp_eyecatch]
       @article.remove_eyecatch!
       @article.eyecatch = @article.tmp_eyecatch.file
