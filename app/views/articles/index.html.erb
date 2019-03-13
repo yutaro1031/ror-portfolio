@@ -23,9 +23,9 @@
           <%= link_to article do %>
             <div class="eyecatch_images">
               <% if article.eyecatch.present? %>
-                <%= image_tag article.eyecatch.to_s, class: 'eyecatch_images' %>
+                <%= image_tag article.eyecatch.to_s %>
               <% else %>
-                <%= image_tag '/no-image.png', class: 'eyecatch_images' %>
+                <%= image_tag '/no-image.png' %>
               <% end %>
             </div>
             <div class="article_info">
@@ -40,7 +40,10 @@
   </div>
 
   <div class="col-md-3">
-<!--    アドセンスゾーン&人気の記事一覧-->
+    <div class="adsense_images" >
+      <%= image_tag '/adsense.jpg' %>
+    </div>
+
   </div>
 </div>
 

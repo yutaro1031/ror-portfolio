@@ -32,7 +32,6 @@
     }
     .eyecatch_images {
       width: 30%;
-      //max-width: 170px;
     }
     .eyecatch_images img {
       width: 100%;
@@ -105,5 +104,12 @@
       text-align: center;
       margin: 10px 0;
     }
+  }
+  .adsense_images {
+    text-align: center;
+  }
+  .adsense_images img {
+    width: 100%;
+    max-width: 345px;
   }
 }
