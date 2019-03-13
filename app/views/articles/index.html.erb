@@ -21,26 +21,27 @@
       <% @articles.each do |article| %>
         <li>
           <%= link_to article do %>
-            <% if article.eyecatch.present? %>
-              <%= image_tag article.eyecatch.to_s, class: 'eyecatch_images' %>
-            <% else %>
-              <%= image_tag '/no-image.png', class: 'eyecatch_images' %>
-            <% end %>
+            <div class="eyecatch_images">
+              <% if article.eyecatch.present? %>
+                <%= image_tag article.eyecatch.to_s, class: 'eyecatch_images' %>
+              <% else %>
+                <%= image_tag '/no-image.png', class: 'eyecatch_images' %>
+              <% end %>
+            </div>
             <div class="article_info">
               <h2><%= article.title %></h2>
-              <p class="article_meta"><%= article.updated_at.strftime("%Y年%m月%d日") %></p>
+              <span class="article_meta"><%= article.updated_at.strftime("%Y年%m月%d日") %></span>
             </div>
           <% end %>
         </li>
       <% end %>
     </ul>
+    <%= paginate @articles %>
   </div>
 
   <div class="col-md-3">
 <!--    アドセンスゾーン&人気の記事一覧-->
   </div>
 </div>
-
-<%= paginate @articles %>
 
 <%= javascript_include_tag 'articles/index.js' %>

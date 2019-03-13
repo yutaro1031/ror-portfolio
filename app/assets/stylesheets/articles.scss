@@ -1,4 +1,5 @@
 #articles {
+  // 記事一覧
   #index {
     .tag_boxes {
       margin-top: 10px;
@@ -14,11 +15,48 @@
     h3 {
       margin: 10px 0;
     }
+    #article-list {
+      padding: 0;
+    }
     #article-list li {
       list-style: none;
+      border-bottom: 1px solid #ddd;
+    }
+    #article-list li:hover {
+      opacity: .6;
+    }
+    #article-list li a{
+      margin: 10px 0;
+      display: flex;
+      position: relative;
+    }
+    .eyecatch_images {
+      width: 30%;
+      //max-width: 170px;
+    }
+    .eyecatch_images img {
+      width: 100%;
+    }
+    .article_info {
+      color: black;
+      width: 70%;
+      padding-left: 10px;
     }
 
+    // 見出しフォントサイズ
+    @media (min-width: 575.99px) { .article_info h2 {font-size: 20px;} }
+    @media (max-width: 575.98px) { .article_info h2 {font-size: 14px;} }
+
+    .article_meta {
+      font-size: 10px;
+      position: absolute;
+      bottom: 10px;
+      right: 0;
+      color: #666;
+    }
   }
+
+  // 記事編集
   #edit {
     .container {
       max-width: 1500px;
