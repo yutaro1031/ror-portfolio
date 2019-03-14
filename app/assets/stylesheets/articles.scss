@@ -7,14 +7,10 @@
       .tag_img {
         max-width: 100%;
         height: auto;
-        :hover {
-          opacity: .6;
-        }
+        :hover {opacity: .6;}
       }
     }
-    h3 {
-      margin: 10px 0;
-    }
+    h3 {margin: 10px 0;}
     h4 {
       margin: 30px 0;
       font-size: 20px;
@@ -24,9 +20,7 @@
       li {
         list-style: none;
         border-bottom: 1px solid #ddd;
-        :hover {
-          opacity: .6;
-        }
+        :hover {opacity: .6;}
         a {
           margin: 10px 0;
           display: flex;
@@ -36,9 +30,7 @@
     }
     .eyecatch_images {
       width: 30%;
-      img {
-        width: 100%;
-      }
+      img {width: 100%;}
     }
     .article_info {
       color: black;
@@ -87,9 +79,7 @@
       color: #FF0000;
       font-weight: bold;
     }
-    .form-group {
-      padding: 10px;
-    }
+    .form-group {padding: 10px;}
     .form-side {
       border: solid 2px;
       margin-bottom: 20px;
@@ -107,12 +97,8 @@
         height: 150px;
         overflow: hidden;
       }
-      .eyecatch_present_img, #eyecatch_img_prev {
-        max-width: 100%;
-      }
-      .btn {
-        display: inline-block;
-      }
+      .eyecatch_present_img, #eyecatch_img_prev {max-width: 100%;}
+      .btn {display: inline-block;}
     }
     .btn_wrap {
       text-align: center;
@@ -129,9 +115,7 @@
 
   //記事詳細画面
   #show {
-    #article-tags {
-      margin: 20px 0;
-    }
+    #article-tags {margin: 20px 0;}
     #article-info {
       h1 {font-size: 22px;}
       #article-meta {
@@ -213,15 +197,11 @@
           position: relative;
         }
       }
-      li:hover {
-        opacity: .6;
-      }
+      li:hover {opacity: .6;}
     }
     .eyecatch_images {
       width: 30%;
-      img {
-        width: 100%;
-      }
+      img {width: 100%;}
     }
     .article_info {
       color: black;
@@ -230,15 +210,9 @@
     }
 
     // 見出しフォントサイズ
-    @media (min-width: 575.99px) {
-      .popular_article_headers {font-size: 10px;}
-    }
-    @media (max-width: 575.98px) {
-      .popular_article_headers {font-size: 20px;}
-    }
-    @media (max-width: 767.98px) {
-      .popular_article_headers {font-size: 14px;}
-    }
+    @media (min-width: 575.99px) { .popular_article_headers {font-size: 10px;} }
+    @media (max-width: 575.98px) { .popular_article_headers {font-size: 20px;} }
+    @media (max-width: 767.98px) { .popular_article_headers {font-size: 14px;} }
 
     .article_meta {
       font-size: 10px;
@@ -247,8 +221,6 @@
       right: 0;
       color: #666;
     }
-    .adsense_images {
-      margin: 10px 0;
-    }
+    .adsense_images {margin: 10px 0;}
   }
 }

@@ -1,5 +1,4 @@
 CKEDITOR.config.height=500;
-CKEDITOR.config.bodyId = "article-body";
 $(document).on('turbolinks:load', function() {
     // 画像のプレビュー
     function readURL(input) {
