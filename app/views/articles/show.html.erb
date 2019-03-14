@@ -1,5 +1,8 @@
 <div class="row">
   <div class="col-md-9">
+    <% if current_user && current_user.admin_flg %>
+      <%= link_to '編集画面へ', edit_article_path(@article), class: 'btn btn-secondary float-right mt-4' %>
+    <% end %>
     <div id="article-area">
       <div id="article-info">
         <h1><%= @article.title %></h1>
