@@ -126,4 +126,60 @@
     width: 100%;
     max-width: 345px;
   }
+
+  //記事詳細画面
+  #show {
+    h4 {
+      margin: 30px 0;
+      font-size: 20px;
+    }
+    #article-list {
+      padding: 0;
+    }
+    #article-list li {
+      list-style: none;
+      border-bottom: 1px solid #ddd;
+    }
+    #article-list li:hover {
+      opacity: .6;
+    }
+    #article-list li a{
+      margin: 10px 0;
+      display: flex;
+      position: relative;
+    }
+    .eyecatch_images {
+      width: 30%;
+    }
+    .eyecatch_images img {
+      width: 100%;
+    }
+    .article_info {
+      color: black;
+      width: 70%;
+      padding-left: 10px;
+    }
+
+    // 見出しフォントサイズ
+    @media (min-width: 575.99px) {
+      .popular_article_headers {font-size: 10px;}
+    }
+    @media (max-width: 575.98px) {
+      .popular_article_headers {font-size: 20px;}
+    }
+    @media (max-width: 767.98px) {
+      .popular_article_headers {font-size: 14px;}
+    }
+
+    .article_meta {
+      font-size: 10px;
+      position: absolute;
+      bottom: 10px;
+      right: 0;
+      color: #666;
+    }
+    .adsense_images {
+      margin: 10px 0;
+    }
+  }
 }

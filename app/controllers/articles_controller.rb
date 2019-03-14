@@ -25,6 +25,8 @@ class ArticlesController < ApplicationController
   def show # 記事詳細画面
     @article[:pv] += 1
     @article.save
+
+    @popular_articles = Article.where(del_flg: false).order(:pv).limit(5)
   end
 
   def new

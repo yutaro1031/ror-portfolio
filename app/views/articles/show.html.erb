@@ -1,13 +1,23 @@
-<div class="card">
-  <div class="card-header">
-    <h4><%= @article.title %></h4>
-    <p><%= @article.user.name %></p>
-    <% @article.tags.each do |tag| %>
-      <span class="badge badge-primary"><%= tag.name %></span>
-    <% end %>
+<div class="row">
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-header">
+        <h4><%= @article.title %></h4>
+        <p><%= @article.user.name %></p>
+        <% @article.tags.each do |tag| %>
+          <span class="badge badge-primary"><%= tag.name %></span>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><%= simple_format(@article.text) %></p>
+      </div>
+      <%= image_tag @article.eyecatch.to_s %>
+    </div>
   </div>
-  <div class="card-body">
-    <p class="card-text"><%= simple_format(@article.text) %></p>
+
+  <div class="col-md-3">
+    <%= render partial: 'side_column', locals: { popular_articles: @popular_articles } %>
   </div>
-  <%= image_tag @article.eyecatch.to_s %>
+
 </div>
+
