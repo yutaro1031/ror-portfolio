@@ -5,12 +5,14 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="<%= controller.controller_name %>">
-     <div class="<%= controller.action_name %>">
+  <body id="<%= controller.controller_name %>">
+     <div id="<%= controller.action_name %>">
         <%= render 'header' %>
         <div class="container">
           <%= yield %>

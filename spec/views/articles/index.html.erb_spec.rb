@@ -11,6 +11,7 @@
     FactoryBot.create_list(:article, 50, user: user)
     @articles = Article.where(del_flg: FALSE)
     @articles = @articles.page(params[:page])
+    @popular_articles = Article.where(del_flg: false).order(:pv).limit(5)
   end
 
   it "ページネーションが表示されているか" do

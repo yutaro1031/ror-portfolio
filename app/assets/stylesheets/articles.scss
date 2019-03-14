@@ -1,5 +1,76 @@
-.articles {
-  .edit {
+#articles {
+  // 記事一覧
+  #index {
+    .tag_boxes {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      .tag_img {
+        max-width: 100%;
+        height: auto;
+      }
+      .tag_img:hover {
+        opacity: .6;
+      }
+    }
+    h3 {
+      margin: 10px 0;
+    }
+    h4 {
+      margin: 30px 0;
+      font-size: 20px;
+    }
+    #article-list {
+      padding: 0;
+    }
+    #article-list li {
+      list-style: none;
+      border-bottom: 1px solid #ddd;
+    }
+    #article-list li:hover {
+      opacity: .6;
+    }
+    #article-list li a{
+      margin: 10px 0;
+      display: flex;
+      position: relative;
+    }
+    .eyecatch_images {
+      width: 30%;
+    }
+    .eyecatch_images img {
+      width: 100%;
+    }
+    .article_info {
+      color: black;
+      width: 70%;
+      padding-left: 10px;
+    }
+
+    // 見出しフォントサイズ
+    @media (min-width: 575.99px) {
+      .new_article_headers {font-size: 20px;}
+      .popular_article_headers {font-size: 10px;}
+    }
+    @media (max-width: 575.98px) {
+      .new_article_headers {font-size: 20px;}
+      .popular_article_headers {font-size: 20px;}
+    }
+    @media (max-width: 767.98px) {
+      .new_article_headers {font-size: 14px;}
+      .popular_article_headers {font-size: 14px;}
+    }
+
+    .article_meta {
+      font-size: 10px;
+      position: absolute;
+      bottom: 10px;
+      right: 0;
+      color: #666;
+    }
+  }
+
+  // 記事編集
+  #edit {
     .container {
       max-width: 1500px;
       padding: 0 100px;
@@ -47,5 +118,12 @@
       text-align: center;
       margin: 10px 0;
     }
+  }
+  .adsense_images {
+    text-align: center;
+  }
+  .adsense_images img {
+    width: 100%;
+    max-width: 345px;
   }
 }

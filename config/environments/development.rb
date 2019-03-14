@@ -72,4 +72,6 @@ Rails.application.configure do
       :password => "hyper1031",
       :authentication => "login",
   }
+
+  config.web_console.whitelisted_ips = '0.0.0.0/0'
 end

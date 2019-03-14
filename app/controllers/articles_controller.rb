@@ -3,8 +3,23 @@ class ArticlesController < ApplicationController
   before_action :set_target_article, only: %i[show edit update destroy]
   
   def index # 記事一覧を表示
-    @articles = Article.where(del_flg: FALSE)
+    find_params = {}
+    find_params[:del_flg] = false
+    find_params[:publish_flg] = true unless current_user && current_user.admin_flg
+
+    if params[:tag_id].present?
+      @list_title = "「#{Tag.find(params[:tag_id]).name}」の記事一覧"
+      @articles = Tag.find(params[:tag_id]).articles.where(find_params).order(created_at: "DESC")
+    elsif params[:q].present?
+      @list_title = "「#{params[:q]}」の検索結果"
+      @articles = Article.where(find_params).where("title LIKE ?", "%#{params[:q]}%").order(created_at: "DESC")
+    else
+      @list_title = "新着記事"
+      @articles = Article.where(find_params).order(created_at: "DESC")
+    end
+
     @articles = @articles.page(params[:page])
+    @popular_articles = Article.where(del_flg: false).order(:pv).limit(5)
   end
 
   def show # 記事詳細画面
@@ -16,7 +31,6 @@ class ArticlesController < ApplicationController
                           user_id: current_user.id,
                           title: "無題の記事",
                           text: "ここに本文を入力してください",
-                          publish_flg: FALSE
     )
     # あらかじめinsertしておく
     unless @article.save
@@ -32,6 +46,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    binding.pry
     case article_params[:update_type]
     when 'tmp' # 下書き保存
       update_article(tmp_article_params)
@@ -78,8 +93,8 @@ class ArticlesController < ApplicationController
   def publish_article_params # 記事公開用のparams
     params = article_params
     params[:publish_flg] = ActiveRecord::Type::Boolean.new.cast(params[:publish_flg])
-    params[:title] = params[:tmp_title] if params[:tmp_title]
-    params[:text] = params[:tmp_text] if params[:tmp_text]
+    params[:title] = @article[:tmp_title] if @article[:tmp_title]
+    params[:text] = @article[:tmp_text] if @article[:tmp_text]
     if @article[:tmp_eyecatch]
       @article.remove_eyecatch!
       @article.eyecatch = @article.tmp_eyecatch.file
