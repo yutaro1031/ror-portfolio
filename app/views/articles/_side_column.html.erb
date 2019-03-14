@@ -6,7 +6,7 @@
   <% popular_articles.each do |article| %>
     <li>
       <%= link_to article do %>
-        <div class="eyecatch_images">
+        <div class="side_eyecatch_images">
           <% if article.eyecatch.present? %>
             <%= image_tag article.eyecatch.to_s %>
           <% else %>

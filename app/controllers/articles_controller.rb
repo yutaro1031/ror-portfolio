@@ -19,14 +19,14 @@ class ArticlesController < ApplicationController
     end
 
     @articles = @articles.page(params[:page])
-    @popular_articles = Article.where(del_flg: false).order(:pv).limit(5)
+    @popular_articles = Article.where(del_flg: false).order(pv: "DESC").limit(5)
   end
 
   def show # 記事詳細画面
     @article[:pv] += 1
     @article.save
 
-    @popular_articles = Article.where(del_flg: false).order(:pv).limit(5)
+    @popular_articles = Article.where(del_flg: false).order(pv: "DESC").limit(5)
   end
 
   def new
