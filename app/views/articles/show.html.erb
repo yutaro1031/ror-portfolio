@@ -1,17 +1,23 @@
 <div class="row">
   <div class="col-md-9">
-    <div class="card">
-      <div class="card-header">
-        <h4><%= @article.title %></h4>
-        <p><%= @article.user.name %></p>
-        <% @article.tags.each do |tag| %>
-          <span class="badge badge-primary"><%= tag.name %></span>
-        <% end %>
+    <div id="article-area">
+      <div id="article-info">
+        <h1><%= @article.title %></h1>
+        <div id="article-tags">
+          <% @article.tags.each do |tag| %>
+            <span class="badge badge-primary"><%= tag.name %></span>
+          <% end %>
+        </div>
+        <span id="article-meta">最終更新日:<%= @article.updated_at.strftime("%Y年%m月%d日") %>  編集者:<%= @article.user.name %></span>
       </div>
-      <div class="card-body">
-        <p class="card-text"><%= simple_format(@article.text) %></p>
+      <% if @article.eyecatch.present? %>
+        <div id="article-eyecatch">
+          <%= image_tag @article.eyecatch.to_s %>
+        </div>
+      <% end %>
+      <div id="article-body">
+        <%== @article.text %>
       </div>
-      <%= image_tag @article.eyecatch.to_s %>
     </div>
   </div>
 

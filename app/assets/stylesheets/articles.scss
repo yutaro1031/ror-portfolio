@@ -131,8 +131,71 @@
   #show {
     #article-tags {
       margin: 20px 0;
-      h1 {
-        font-size: 22px;
+    }
+    #article-info {
+      h1 {font-size: 22px;}
+      #article-meta {
+        font-size: 12px;
+        color: #666
+      }
+    }
+    #article-eyecatch {
+      margin: 20px 0 40px 0;
+      text-align: center;
+      overflow: hidden;
+    }
+    #article-body {
+      h2 {
+        font-size: 1.45rem;
+        padding: 0.5em;/*文字周りの余白*/
+        color: #010101;/*文字色*/
+        background: #eaf3ff;/*背景色*/
+        border-bottom: solid 3px black;/*下線*/
+        margin-bottom: 20px;
+      }
+      h3 {
+        font-size: 1.15rem;
+        padding: 0.5em;
+        background: aliceblue;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.23);
+        margin-bottom: 20px;
+      }
+      p {
+        img {
+          display: block;
+          margin: auto;
+        }
+      }
+      blockquote {
+        position: relative;
+        padding: 10px 15px 10px 50px;
+        box-sizing: border-box;
+        font-style: italic;
+        background: #efefef;
+        color: #555;
+        :before {
+          display: inline-block;
+          position: absolute;
+          top: 10px;
+          left: -3px;
+          vertical-align: middle;
+          content: "“";
+          font-family: sans-serif;
+          color: #cfcfcf;
+          font-size: 90px;
+          line-height: 1;
+        }
+        p {
+          padding: 0;
+          margin: 10px 0;
+          line-height: 1.7;
+        }
+        cite {
+          display: block;
+          text-align: right;
+          color: #888888;
+          font-size: 0.9em;
+        }
       }
     }
     h4 {
