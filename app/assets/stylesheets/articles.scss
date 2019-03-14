@@ -115,16 +115,9 @@
       margin: 10px 0;
     }
   }
-  .adsense_images {
-    text-align: center;
-    img {
-      width: 100%;
-      max-width: 345px;
-    }
-  }
 
-  //記事詳細画面
-  #show {
+  //記事詳細画面、プレビュー
+  #show, #preview {
     #article-tags {margin: 20px 0;}
     #article-info {
       h1 {font-size: 22px;}
@@ -235,6 +228,14 @@
       right: 0;
       color: #666;
     }
-    .adsense_images {margin: 10px 0;}
+  }
+  //　全体適用
+  .adsense_images {
+    text-align: center;
+    margin: 10px 0;
+    img {
+      width: 100%;
+      max-width: 345px;
+    }
   }
 }

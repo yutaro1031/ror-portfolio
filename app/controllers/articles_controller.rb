@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   # 各アクションの実行前にset_target_articleが実行されるように指定
-  before_action :set_target_article, only: %i[show edit update destroy]
+  before_action :set_target_article, only: %i[show edit update destroy preview]
+  before_action :set_popular_articles, only: %i[index show preview]
   
   def index # 記事一覧を表示
     find_params = {}
@@ -19,14 +20,11 @@ class ArticlesController < ApplicationController
     end
 
     @articles = @articles.page(params[:page])
-    @popular_articles = Article.where(del_flg: false).order(pv: "DESC").limit(5)
   end
 
   def show # 記事詳細画面
     @article[:pv] += 1
     @article.save
-
-    @popular_articles = Article.where(del_flg: false).order(pv: "DESC").limit(5)
   end
 
   def new
@@ -46,6 +44,10 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    render_404 unless current_user && current_user.admin_flg
+  end
+
+  def preview
     render_404 unless current_user && current_user.admin_flg
   end
 
@@ -71,6 +73,10 @@ class ArticlesController < ApplicationController
   def set_target_article
     @article = Article.find(params[:id])
     render_404 if @article.del_flg # 削除された記事は404
+  end
+
+  def set_popular_articles
+    @popular_articles = Article.where(del_flg: false).order(pv: "DESC").limit(5)
   end
 
   def article_params

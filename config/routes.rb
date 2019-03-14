@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   }
 
   resources :articles, except: [:create]
+  get 'articles/:id/preview', to:'articles#preview'
 
   get 'admin', to: 'admin#index'
 
