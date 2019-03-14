@@ -23,6 +23,8 @@ class ArticlesController < ApplicationController
   end
 
   def show # 記事詳細画面
+    @article[:pv] += 1
+    @article.save
   end
 
   def new
@@ -46,7 +48,6 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    binding.pry
     case article_params[:update_type]
     when 'tmp' # 下書き保存
       update_article(tmp_article_params)
@@ -79,6 +80,7 @@ class ArticlesController < ApplicationController
                                     :tmp_text,
                                     :tmp_eyecatch,
                                     :publish_flg,
+                                    :pv,
                                     :update_type,
                                     tag_ids: [])
   end
