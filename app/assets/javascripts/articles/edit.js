@@ -1,5 +1,5 @@
 CKEDITOR.config.height=500;
-$(document).on('turbolinks:load', function() {
+$(window).on('load', function() {
     // 画像のプレビュー
     function readURL(input) {
         if (input.files && input.files[0]) {
