@@ -22,6 +22,7 @@
         <%== @article.text %>
       </div>
     </div>
+    <%= render partial: 'comments/comments_list', locals: { comments: @article.comments } %>
   </div>
 
   <div class="col-md-3">

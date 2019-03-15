@@ -1,0 +1,12 @@
+<div id="comments-list">
+  <ul class="list-unstyled">
+    <% comments.each do |comment| %>
+      <li class="media">
+        <div class="media-body">
+          <h5 class="mt-0 mb-1"><%= comment.user.name %></h5><span><%= comment.updated_at.strftime("%Y年%m月%d日 %H時%m分") %></span>
+          <%= comment.text %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

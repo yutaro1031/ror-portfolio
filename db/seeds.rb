@@ -56,4 +56,8 @@ destroy_allであれば、ActiveRecordを介することで関連づけれらた
   #     TagRelation.create(article_id: i, tag_id: 4)
   #   end
 
+  # (1..10).each do |i|
+  #     Comment.create(user_id:1, article_id:53, text: "コメント#{i}")
+  # end
+
 end
