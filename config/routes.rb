@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :articles, except: [:create]
   get 'articles/:id/preview', to:'articles#preview'
 
+  resources :comments, only: %i[create destroy]
+
   get 'admin', to: 'admin#index'
 
   devise_scope :user do
