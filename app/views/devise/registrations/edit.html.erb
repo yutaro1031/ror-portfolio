@@ -1,0 +1,43 @@
+<%= render "devise/shared/error_messages", resource: resource %>
+
+<h1>ユーザー情報の編集</h1>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <div class="form-group">
+    <%= f.label "ユーザー名" %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "メールアドレス" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>現在のアドレスで本登録が行われていません <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label "変更後のパスワード" %> <i>(変更しない場合は入力しないでください)</i>
+    <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+    <% if @minimum_password_length %>
+      <em>(英数字 <%= @minimum_password_length %> 文字以上)</em>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "変更後のパスワード(確認)" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "現在のパスワード" %> <i>(変更しない場合は入力しないでください)</i>
+    <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
+  </div>
+
+  <%= f.submit "更新する", class: 'btn btn-primary' %>
+<% end %>
+
+<%= button_to "アカウント削除", registration_path(resource_name), data: { confirm: "本当に削除しますか？" }, method: :delete, class: 'btn btn-danger' %>
+
+<%= link_to "戻る", :back, class: 'btn btn-outline-primary' %>

@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-sm-9 col-lg-9">
+    <%= form_with model: article, class: 'ajax-form', id: 'ajax-form-tmp' do |f| %>
+      <%= f.hidden_field :update_type, value: "tmp", class: 'form-control' %>
+
+      <div class="form-group">
+        <%= f.label :title, 'タイトル' %>
+        <% if article[:tmp_title] %>
+          <%= f.text_field :tmp_title, class: 'form-control' %>
+        <% else %>
+          <%= f.text_field :title, class: 'form-control' %>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :text, '本文' %>
+        <% if article[:tmp_text] %>
+          <%= f.cktext_area :tmp_text, class: 'form-control' %>
+        <% else %>
+          <%= f.cktext_area :text, class: 'form-control' %>
+        <% end %>
+      </div>
+
+      <div class="save-info">
+        <div class="hidden saving">保存中...<span class="now-time"></span></div>
+        <div class="hidden saved">保存完了しました<span class="now-time"></span></div>
+        <div class="hidden failed-save">保存失敗しました<span class="now-time"></span></div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-sm-3 col-lg-3">
+    <%= form_with model: article, class: 'ajax-form form-side', id: 'ajax-form-publish' do |f| %>
+      <%= f.hidden_field :update_type, value: "publish", class: 'form-control' %>
+      <h5>公開設定</h5>
+      <div class="form-group">
+        <label><%= f.radio_button :publish_flg, true %> 公開 </label><br>
+        <label><%= f.radio_button :publish_flg, false %> 非公開 </label>
+      </div>
+
+      <div class="form-group">
+        <span>タグ</span>
+        <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+          <div class="form-check">
+            <%= tag.label class: 'form-check-label' do %>
+              <%= tag.check_box class: 'form-check-input' %>
+              <%= tag.text %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div id="edited-list">
+        <p id="edited-title-or-text" class="edited <%= 'hidden' unless article[:tmp_title] || article[:tmp_text] %>">タイトルまたは本文が編集されています</p>
+        <p id="edited-eyecatch" class="edited <%= 'hidden' unless article[:tmp_eyecatch] %>">アイキャッチ画像が編集されています</p>
+      </div>
+      <div class="btn_wrap">
+      <%= f.submit "更新する", class: 'ajax-submit btn btn-primary' %>
+      </div>
+    <% end %>
+
+    <div class="form-side">
+    <%= form_with model: article, class: 'ajax-form', id: 'ajax-form-add-eyecatch' do |f| %>
+      <%= f.hidden_field :update_type, value: "tmp", class: 'form-control' %>
+      <h5>アイキャッチ画像</h5>
+      <div class="form-group">
+        <div class="form-img">
+          <img id="eyecatch_img_prev" src="#" class="hidden" alt=""/>
+
+          <% if article[:tmp_eyecatch] %>
+            <%= image_tag article.tmp_eyecatch.to_s, class: 'eyecatch_present_img' %>
+          <% elsif article[:eyecatch] %>
+            <%= image_tag article.eyecatch.to_s, class: 'eyecatch_present_img' %>
+          <% else %>
+            <%= image_tag '/no-image.png', class: 'eyecatch_present_img' %>
+          <% end %>
+        </div>
+
+        <%= f.file_field :tmp_eyecatch, class: 'post-img hidden'%>
+        <div class="btn_wrap">
+          <button type="button" class="btn btn-secondary upload-file-btn">アップロード</button>
+        </div>
+      </div>
+    <% end %>
+
+    <%= form_with model: article, class: 'ajax-form', id: 'ajax-form-remove-eyecatch' do |f| %>
+      <%= f.hidden_field :update_type, value: "remove-eyecatch", class: 'form-control' %>
+      <div class="btn_wrap">
+      <% if article[:tmp_eyecatch] %>
+        <%= f.submit "下書き画像を削除する", id: 'delete-eyecatch-btn', class: 'ajax-submit btn btn-danger' %>
+      <% elsif article[:eyecatch] %>
+        <%= f.submit "画像を削除する", id: 'delete-eyecatch-btn', class: 'ajax-submit btn btn-danger' %>
+      <% else %>
+        <%= f.submit "画像を削除する", disabled: true, id: 'delete-eyecatch-btn', class: 'ajax-submit btn btn-danger' %>
+      <% end %>
+      </div>
+    <% end %>
+    </div>
+
+    <div class="btn_wrap">
+      <%= link_to '記事を削除する', article, class: 'btn btn-danger', method: :delete %>
+    </div>
+
+  </div>
+</div>
+
+<%= javascript_include_tag 'articles/edit.js' %>

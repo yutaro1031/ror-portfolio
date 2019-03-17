@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-9">
+    <% if current_user && current_user.admin_flg %>
+      <%= link_to '編集画面へ', edit_article_path(@article), class: 'btn btn-secondary float-right mt-4' %>
+    <% end %>
+    <div id="article-area">
+      <div id="article-info">
+        <h1><%= @article.title %></h1>
+        <div id="article-tags">
+          <% @article.tags.each do |tag| %>
+            <span class="badge badge-primary"><%= tag.name %></span>
+          <% end %>
+        </div>
+        <span id="article-meta">最終更新日:<%= @article.updated_at.strftime("%Y年%m月%d日") %>  編集者:<%= @article.user.name %></span>
+      </div>
+      <% if @article.eyecatch.present? %>
+        <div id="article-eyecatch">
+          <%= image_tag @article.eyecatch.to_s %>
+        </div>
+      <% end %>
+      <div id="article-body">
+        <%== @article.text %>
+      </div>
+    </div>
+    <%= render partial: 'comments/comments_list', locals: {
+        comments: @article.comments.where(publish_flg: true, del_flg: false).order(id: "DESC"),
+        article_id: @article.id
+    } %>
+  </div>
+
+  <div class="col-md-3">
+    <%= render partial: 'side_column', locals: { popular_articles: @popular_articles } %>
+  </div>
+
+</div>
+<%= javascript_include_tag 'articles/comments.js' %>
