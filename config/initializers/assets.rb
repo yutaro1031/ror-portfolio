@@ -17,4 +17,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile += %w( articles/edit.js )
 
 # 記事一覧画面のjs
-Rails.application.config.assets.precompile += %w( articles/index.js )
+Rails.application.config.assets.precompile += %w( articles/comments.js )

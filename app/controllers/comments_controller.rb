@@ -4,7 +4,11 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      render json: {result: "ok"}
+      render json: {
+          result: "ok",
+          user_name: User.find(@comment[:user_id]).name,
+          comment: @comment[:text]
+      }
     else
       render json: {result: "error"}
     end

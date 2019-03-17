@@ -13,4 +13,16 @@
       </li>
     <% end %>
   </ul>
+  <div class="alert alert-primary hidden" id="comment-notice">コメントを投稿しました</div>
+  <div class="alert alert-danger hidden" id="comment-alert">コメントを投稿できませんでした</div>
 </div>
+<% if current_user && current_user.admin_flg %>
+  <%= form_with model: Comment.new, id: 'ajax-form-comment' do |f| %>
+    <%= f.hidden_field :article_id, value: article_id, class: 'form-control' %>
+    <%= f.hidden_field :user_id, value: current_user.id, class: 'form-control' %>
+    <div class="form-group">
+      <%= f.text_area :text, class: 'form-control', id: 'comment-form', placeholder: "コメントを書く" %>
+    </div>
+    <%= f.submit "投稿する", class: 'btn btn-primary', id: 'comment-submit' %>
+  <% end %>
+<% end %>
