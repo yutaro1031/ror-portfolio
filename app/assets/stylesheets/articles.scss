@@ -238,11 +238,27 @@
     #media-head {
       margin-bottom: 10px;
       display: flex;
+      position: relative;
       span {
         margin-left: 10px;
         padding-top: 7px;
         font-size: 10px;
         color: #666;
+      }
+      .reader_menu {
+        margin-left: auto;
+        font-size: 20px;
+        text-decoration: none;
+        color: black;
+      }
+      li {list-style: none;}
+      .comment_menu {
+        position: absolute;
+        right: 0;
+        top: 30px;
+        padding: 5px;
+        background: #fff;
+        border: 1px solid #ddd;
       }
     }
     #comment-form {
@@ -252,6 +268,10 @@
     #comment-submit {
       display: block;
       margin: 0 0 0 auto;
+    }
+    .comment_delete_notice {
+      display: inline-block;
+      margin: auto;
     }
   }
   //　全体適用

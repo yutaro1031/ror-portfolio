@@ -16,7 +16,10 @@ class CommentsController < ApplicationController
 
   def destroy
     if @comment.destroy
-      render json: {result: "ok"}
+      render json: {
+          result: "ok",
+          index: params[:format]
+      }
     else
       render json: {result: "error"}
     end

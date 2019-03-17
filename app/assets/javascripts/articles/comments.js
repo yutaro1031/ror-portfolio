@@ -30,4 +30,22 @@ $(window).on('load', function() {
             return year + "年" + month + "月" + day + "日 " + hour + "時" + minutes + "分"
         }
     });
+
+    let reader_menu = $('.reader_menu');
+    reader_menu.on('click', function(e) {
+        e.preventDefault();
+        let index = reader_menu.index(this);
+        reader_menu.eq(index).parent().children('ul').toggleClass('hidden');
+    });
+
+    $(document).on('ajax:success', ".delete_comment", function(e) {
+        if (e.detail[0].result === "ok") {
+            let index = e.detail[0].index;
+            reader_menu.eq(index).parents('.media').html(
+              '<div class="alert alert-danger comment_delete_notice">コメントを削除しました</div>'
+            );
+        } else {
+            console.log('error');
+        }
+    });
 });
