@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    if @comment.destroy
+    if @comment.update(del_flg: true)
       render json: {
           result: "ok",
           index: params[:format]

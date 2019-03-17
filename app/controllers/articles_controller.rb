@@ -64,8 +64,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy
-    redirect_to articles_path, alert: "記事を削除しました"
+    alert_message = @article.update(del_flg: true)? "記事を削除しました" : "記事を削除できませんでした"
+    redirect_to articles_path, alert: alert_message
   end
 
   private
@@ -128,7 +128,7 @@ class ArticlesController < ApplicationController
   def ajax_remove_eyecatch
     if @article[:tmp_eyecatch]
       result_message = "removed_tmp_eyecatch"
-      eyecatch_image_path = @article.eyecatch.to_s# if @article[:eyecatch]
+      eyecatch_image_path = @article.eyecatch.to_s
       @article.remove_tmp_eyecatch!
     else
       result_message = "removed_eyecatch"

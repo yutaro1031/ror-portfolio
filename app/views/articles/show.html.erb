@@ -22,7 +22,10 @@
         <%== @article.text %>
       </div>
     </div>
-    <%= render partial: 'comments/comments_list', locals: { comments: @article.comments.where(publish_flg: true).order(id: "DESC"), article_id: @article.id } %>
+    <%= render partial: 'comments/comments_list', locals: {
+        comments: @article.comments.where(publish_flg: true, del_flg: false).order(id: "DESC"),
+        article_id: @article.id
+    } %>
   </div>
 
   <div class="col-md-3">
