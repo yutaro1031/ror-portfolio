@@ -30,7 +30,7 @@ jobs:
 
 workflows:
   version: 2
-  auto_test:
+  test-deploy:
     jobs:
       - test
       - deploy:
