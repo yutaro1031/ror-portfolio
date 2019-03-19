@@ -97,5 +97,9 @@ Rails.application.configure do
   config.assets.precompile += %w( ckeditor/* )
   config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
 
-  config.assets.initialize_on_precompile=false
+  config.assets.initialize_on_precompile = false
+
+  # herokuメール設定
+  config.action_mailer.default_url_options = { :host => 'ror-media-portfolio.herokuapp.com' }
+
 end
