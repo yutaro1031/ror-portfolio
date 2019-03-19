@@ -65,22 +65,22 @@ destroy_allであれば、ActiveRecordを介することで関連づけれらた
 end
 
 if Rails.env == 'production'
-  Tag.create([
-                 { name: 'Ruby on Rails4' },
-                 { name: 'Ruby on Rails5' },
-                 { name: 'Python2' },
-                 { name: 'Python3' },
-                 { name: 'Django2' }
-             ])
+  # Tag.create([
+  #                { name: 'Ruby on Rails4' },
+  #                { name: 'Ruby on Rails5' },
+  #                { name: 'Python2' },
+  #                { name: 'Python3' },
+  #                { name: 'Django2' }
+  #            ])
 
-  user = User.create(name: "admin", email: "admin@gmail.com", password: "password", password_confirmation: "password", admin_flg: TRUE)
-  user.confirm
-  user = User.create(name: "normal", email: "normal@gmail.com", password: "password", password_confirmation: "password", admin_flg: FALSE)
-  user.confirm
+  # user = User.create(name: "admin", email: "admin@gmail.com", password: "password", password_confirmation: "password", admin_flg: TRUE)
+  # user.confirm
+  # user = User.create(name: "normal", email: "normal@gmail.com", password: "password", password_confirmation: "password", admin_flg: FALSE)
+  # user.confirm
 
   (1..50).each do |i|
     Article.create(title: "タイトル#{i}",
-                   user_id: 1,
+                   user_id: 2,
                    text: "本文#{i}",
                    publish_flg: true,
                    eyecatch: open("#{Rails.root}/db/fixtures/no-image.png")
