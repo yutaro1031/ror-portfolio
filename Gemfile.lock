@@ -85,13 +85,6 @@ GEM
       terrapin
     climate_control (0.2.0)
     coderay (1.1.2)
-    coffee-rails (4.2.2)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.1.4)
     crass (1.0.4)
     database_cleaner (1.7.0)
@@ -313,7 +306,6 @@ DEPENDENCIES
   carrierwave
   chromedriver-helper
   ckeditor
-  coffee-rails (~> 4.2)
   database_cleaner
   derailed
   devise
@@ -342,7 +334,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.3.6p384
+   ruby 2.4.5p335
 
 BUNDLED WITH
-   1.16.1
+   1.17.3
