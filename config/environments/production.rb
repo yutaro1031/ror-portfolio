@@ -100,8 +100,10 @@ Rails.application.configure do
   config.assets.initialize_on_precompile = false
 
   # SendGrid
-  ActionMailer::Base.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options   = { host: 'ror-media-portfolio.herokuapp.com' }
   ActionMailer::Base.smtp_settings = {
       :address        => 'smtp.sendgrid.net',
       :port           => 587,
