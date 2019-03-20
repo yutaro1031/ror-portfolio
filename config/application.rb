@@ -17,5 +17,8 @@ module App
     # the framework and any gems in your application.
     config.i18n.default_locale = :ja
     config.time_zone = 'Tokyo'
+
+    # rake assets:precompile中にDB見に行くことによりエラーが起こることを防ぐ
+    config.assets.initialize_on_precompile = false
   end
 end
