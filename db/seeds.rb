@@ -7,13 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 if Rails.env == 'development'
-  # Tag.create([
-  #                { name: 'Ruby on Rails4' },
-  #                { name: 'Ruby on Rails5' },
-  #                { name: 'Python2' },
-  #                { name: 'Python3' },
-  #                { name: 'Django2' },
-  #            ])
+  Tag.create([
+                 { name: 'Ruby on Rails4' },
+                 { name: 'Ruby on Rails5' },
+                 { name: 'Python2' },
+                 { name: 'Python3' },
+                 { name: 'Django2' },
+             ])
   # (1..50).each do |i|
   #   Article.create(title: "タイトル#{i}", user_id: 2, text: "本文#{i}")
   # end
@@ -28,8 +28,10 @@ if Rails.env == 'development'
   # user = User.find_by(id: 5)
   # user.update(admin_flg: TRUE)
   # User.delete_all
-  # user = User.create(name: "admin", email: "admin@gmail.com", password: "password", password_confirmation: "password", admin_flg: TRUE)
-  # user.confirm
+  user = User.create(name: "admin", email: "admin@gmail.com", password: "password", password_confirmation: "password", admin_flg: TRUE)
+  user.confirm
+  user = User.create(name: "normal", email: "normal@gmail.com", password: "password", password_confirmation: "password", admin_flg: FALSE)
+  user.confirm
 
 =begin
 【メモ】
@@ -42,14 +44,14 @@ destroy_allであれば、ActiveRecordを介することで関連づけれらた
 
   # Article.destroy_all
 
-  # (1..50).each do |i|
-  #   Article.create(title: "タイトル#{i}",
-  #                  user_id: 1,
-  #                  text: "本文#{i}",
-  #                  publish_flg: true,
-  #                  eyecatch: open("#{Rails.root}/db/fixtures/no-image.png")
-  #                  )
-  # end
+  (1..50).each do |i|
+    Article.create(title: "タイトル#{i}",
+                   user_id: 1,
+                   text: "本文#{i}",
+                   publish_flg: true,
+                   eyecatch: open("#{Rails.root}/db/fixtures/no-image.png")
+                   )
+  end
   #
   # (1..50).each do |i|
   #     TagRelation.create(article_id: i, tag_id: 3)
@@ -60,4 +62,28 @@ destroy_allであれば、ActiveRecordを介することで関連づけれらた
   #     Comment.create(user_id:1, article_id:53, text: "コメント#{i}")
   # end
 
+end
+
+if Rails.env == 'production'
+  Tag.create([
+                 { name: 'Ruby on Rails4' },
+                 { name: 'Ruby on Rails5' },
+                 { name: 'Python2' },
+                 { name: 'Python3' },
+                 { name: 'Django2' }
+             ])
+
+  user = User.create(name: "admin", email: "admin@gmail.com", password: "password", password_confirmation: "password", admin_flg: TRUE)
+  user.confirm
+  user = User.create(name: "normal", email: "normal@gmail.com", password: "password", password_confirmation: "password", admin_flg: FALSE)
+  user.confirm
+
+  (1..50).each do |i|
+    Article.create(title: "タイトル#{i}",
+                   user_id: 2,
+                   text: "本文#{i}",
+                   publish_flg: true,
+                   eyecatch: open("#{Rails.root}/db/fixtures/no-image.png")
+    )
+  end
 end

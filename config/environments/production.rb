@@ -97,5 +97,20 @@ Rails.application.configure do
   config.assets.precompile += %w( ckeditor/* )
   config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
 
-  config.assets.initialize_on_precompile=false
+  config.assets.initialize_on_precompile = false
+
+  # SendGrid
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'https://ror-media-portfolio.herokuapp.com/' }
+  ActionMailer::Base.smtp_settings = {
+      :address        => 'smtp.sendgrid.net',
+      :port           => 587,
+      :authentication => :plain,
+      :user_name      => ENV['SENDGRID_USERNAME'],
+      :password       => ENV['SENDGRID_PASSWORD'],
+      :domain         => 'herokuapp.com',
+      :enable_starttls_auto => true
+  }
 end

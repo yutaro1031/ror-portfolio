@@ -1,24 +1,36 @@
-# README
+## 概要
+Ruby on Railsの勉強として作成した、メディアのポートフォリオです。
+一般的なメディアに実装される、基本的な機能を実装しました。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## バージョン
+Ruby 2.4.5
 
-Things you may want to cover:
+Rails 5.2.2
 
-* Ruby version
+## 実装機能
 
-* System dependencies
+### 記事関連
+- 一覧表示機能
+- 詳細表示機能
+- 削除機能
+- 編集機能
+- プレビュー機能
+- 人気記事一覧表示機能
+- キーワード検索機能
+- タグ別記事一覧表示機能
 
-* Configuration
 
-* Database creation
+### ユーザー関連
+- 登録機能
+- 編集機能(アドレス・パスワード)
+- 管理ユーザー追加機能
+- ログイン・アウト機能
 
-* Database initialization
+### コメント関連
+- 投稿機能
+- 削除機能
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## その他
+- dockerによる環境構築
+- rspec、capybaraによる簡易的なテストの導入
+- ciツールによるテスト、デプロイ自動化
