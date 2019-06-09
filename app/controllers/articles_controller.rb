@@ -7,6 +7,7 @@ class ArticlesController < ApplicationController
     find_params = {}
     find_params[:del_flg] = false
     find_params[:publish_flg] = true unless current_user && current_user.admin_flg
+    authorize(Article)
 
     if params[:tag_id].present?
       @list_title = "「#{Tag.find(params[:tag_id]).name}」の記事一覧"
@@ -16,7 +17,8 @@ class ArticlesController < ApplicationController
       @articles = Article.where(find_params).where("title LIKE ?", "%#{params[:q]}%").order(created_at: "DESC")
     else
       @list_title = "新着記事"
-      @articles = Article.where(find_params).order(created_at: "DESC")
+      # @articles = Article.where(find_params).order(created_at: "DESC")
+      @articles = policy_scope(Article).order(created_at: "DESC")
     end
 
     @articles = @articles.page(params[:page])
