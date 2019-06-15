@@ -50,6 +50,8 @@ GEM
     archive-zip (0.11.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
+    audited (4.8.0)
+      activerecord (>= 4.0, < 5.3)
     autoprefixer-rails (9.4.8)
       execjs
     bcrypt (3.1.12)
@@ -186,6 +188,8 @@ GEM
       pry (~> 0.10)
     public_suffix (3.0.3)
     puma (3.12.0)
+    pundit (2.0.1)
+      activesupport (>= 3.0.0)
     rack (2.0.6)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -305,6 +309,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  audited (~> 4.7)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.0.0)
@@ -327,6 +332,7 @@ DEPENDENCIES
   mysql2 (>= 0.4.4, < 0.6.0)
   pry-byebug
   puma (~> 3.11)
+  pundit
   rails (~> 5.2.2)
   rails-controller-testing
   rails-i18n
