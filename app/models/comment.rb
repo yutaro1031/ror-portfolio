@@ -15,6 +15,7 @@
 class Comment < ApplicationRecord
   belongs_to :article
   belongs_to :user
+  audited associated_with: :article
 
   validates :text, presence: true, length: { maximum:1000 }
 end

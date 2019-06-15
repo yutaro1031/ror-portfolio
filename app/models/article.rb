@@ -26,4 +26,5 @@ class Article < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :tag_relations, dependent: :destroy
   has_many :tags, through: :tag_relations
+  has_associated_audits
 end
